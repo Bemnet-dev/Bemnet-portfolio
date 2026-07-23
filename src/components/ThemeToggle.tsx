@@ -1,77 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Monitor, ChevronDown } from 'lucide-react';
+'use client'
+
+import { Sun, Moon } from 'lucide-react'
+import { useTheme } from './ThemeProvider'
+import { useEffect, useState } from 'react'
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('dark');
-  const [isOpen, setIsOpen] = useState(false);
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | 'system' || 'dark';
-    setTheme(savedTheme);
-    applyTheme(savedTheme);
-  }, []);
+    setMounted(true)
+  }, [])
 
-  const applyTheme = (selectedTheme: 'light' | 'dark' | 'system') => {
-    const root = document.documentElement;
-    
-    if (selectedTheme === 'system') {
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      root.classList.toggle('dark', systemPrefersDark);
-    } else {
-      root.classList.toggle('dark', selectedTheme === 'dark');
-    }
-  };
+  if (!mounted) {
+    return <div className="w-12 h-6 bg-gray-300 dark:bg-gray-600 rounded-full" />
+  }
 
-  const handleThemeChange = (newTheme: 'light' | 'dark' | 'system') => {
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    applyTheme(newTheme);
-    setIsOpen(false);
-  };
-
-  const themes = [
-    { id: 'light', label: 'Light', icon: <Sun size={16} /> },
-    { id: 'dark', label: 'Dark', icon: <Moon size={16} /> },
-    { id: 'system', label: 'System', icon: <Monitor size={16} /> }
-  ];
-
-  const currentTheme = themes.find(t => t.id === theme);
+  const isDark = theme === 'dark'
 
   return (
-    <div className="relative">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 text-gray-300 hover:text-teal-300 transition-colors duration-300 font-mono"
-      >
-        {currentTheme?.icon}
-        <span className="hidden sm:inline">{currentTheme?.label}</span>
-        <ChevronDown size={14} className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-      </button>
+    <button
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      className="relative w-12 h-6 bg-gray-300 dark:bg-gray-600 rounded-full p-1 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transform active:scale-95"
+      aria-label="Toggle theme"
+    >
+      {/* Track */}
+      <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${isDark ? 'from-blue-500 to-purple-600' : 'from-orange-400 to-yellow-400'
+        } transition-all duration-300`} />
 
-      {isOpen && (
-        <>
-          <div 
-            className="fixed inset-0 z-10" 
-            onClick={() => setIsOpen(false)}
-          />
-          <div className="absolute right-0 mt-2 w-32 bg-gray-800 border border-gray-700 rounded-md shadow-lg z-20">
-            {themes.map((themeOption) => (
-              <button
-                key={themeOption.id}
-                onClick={() => handleThemeChange(themeOption.id as 'light' | 'dark' | 'system')}
-                className={`w-full flex items-center space-x-2 px-3 py-2 text-sm text-left hover:bg-gray-700 transition-colors ${
-                  theme === themeOption.id ? 'text-teal-300' : 'text-gray-300'
-                }`}
-              >
-                {themeOption.icon}
-                <span>{themeOption.label}</span>
-              </button>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
+      {/* Thumb */}
+      <div className={`relative w-4 h-4 bg-white rounded-full shadow-md flex items-center justify-center transition-transform duration-300 ${isDark ? 'translate-x-6' : 'translate-x-0'
+        }`}>
+        {isDark ? (
+          <Moon size={10} className="text-gray-700" />
+        ) : (
+          <Sun size={10} className="text-yellow-500" />
+        )}
+      </div>
 
-export default ThemeToggle;
+      {/* Background Icons */}
+      <div className={`absolute left-1 top-1 bottom-1 flex items-center justify-center transition-opacity duration-300 ${isDark ? 'opacity-0' : 'opacity-100'
+        }`}>
+        <Sun size={12} className="text-white" />
+      </div>
+
+      <div className={`absolute right-1 top-1 bottom-1 flex items-center justify-center transition-opacity duration-300 ${isDark ? 'opacity-100' : 'opacity-0'
+        }`}>
+        <Moon size={12} className="text-white" />
+      </div>
+    </button>
+  )
+}
+
+export default ThemeToggle

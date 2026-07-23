@@ -1,26 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { ChevronDown, Mail, Github, Linkedin, ExternalLink } from 'lucide-react'
+import { motion, Variants } from 'framer-motion'
+import { ArrowDown, Github, Linkedin, Mail, ExternalLink } from 'lucide-react'
 
 const Hero = () => {
-  const [typewriterText, setTypewriterText] = useState('')
-  const fullText = "I build things for the web."
-
-  useEffect(() => {
-    let currentIndex = 0
-    const timer = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setTypewriterText(fullText.slice(0, currentIndex))
-        currentIndex++
-      } else {
-        clearInterval(timer)
-      }
-    }, 100)
-
-    return () => clearInterval(timer)
-  }, [])
-
   const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
     e.preventDefault()
     const element = document.querySelector(sectionId)
@@ -33,95 +16,172 @@ const Hero = () => {
     }
   }
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  }
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" as const }
+    }
+  }
+
   return (
-    <section className="min-h-screen flex items-center justify-center section-padding bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5 dark:opacity-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(20,184,166,0.3),transparent_70%)]" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" />
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" />
+    <section id="hero" className="min-h-screen flex items-center justify-center bg-abstract relative overflow-hidden pt-20">
+      {/* Abstract background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 0.2, scale: 1 }}
+          transition={{ duration: 1.5 }}
+          className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-blue-600 rounded-full mix-blend-overlay filter blur-[120px]"
+        />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 0.15, scale: 1 }}
+          transition={{ duration: 1.5, delay: 0.3 }}
+          className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-blue-700 rounded-full mix-blend-overlay filter blur-[100px]"
+        />
       </div>
 
       <div className="container-max relative z-10">
-        <div className="max-w-4xl mx-auto text-center lg:text-left animate-fade-in">
-          <div className="mb-6">
-            <p className="text-primary-600 dark:text-primary-400 font-mono text-lg mb-4 animate-slide-up">
-              Hi, my name is
-            </p>
-          </div>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-5xl"
+        >
+          {/* Code-style greeting */}
+          <motion.div variants={itemVariants} className="mb-12">
+            <div className="inline-flex items-center gap-3 px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-lg font-mono text-sm">
+              <span className="text-blue-400">&lt;</span>
+              <span className="text-white">developer</span>
+              <span className="text-blue-400">&gt;</span>
+            </div>
+          </motion.div>
 
-          <div className="mb-6">
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-4">
-              <span className="block text-gray-900 dark:text-gray-100 animate-slide-up">
-                Bemnet Yitagesu.
-              </span>
+          {/* Main headline */}
+          <motion.div variants={itemVariants} className="mb-8">
+            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight">
+              <span className="block text-white mb-2">Bemnet</span>
+              <span className="block text-white">Yitagesu.</span>
             </h1>
-          </div>
+          </motion.div>
 
-          <div className="mb-8">
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-600 dark:text-gray-400 mb-6">
-              <span className="text-gradient">{typewriterText}</span>
-              <span className="text-primary-500 animate-pulse inline-block ml-1">|</span>
+          {/* Subheading with gradient */}
+          <motion.div variants={itemVariants} className="mb-10">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-snug">
+              <span className="text-gray-400">Building </span>
+              <span className="bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-600 bg-clip-text text-transparent">
+                scalable solutions
+              </span>
             </h2>
-          </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-snug mt-3">
+              <span className="text-gray-400">with </span>
+              <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                precision & impact.
+              </span>
+            </h2>
+          </motion.div>
 
-          <div className="mb-12">
-            <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 animate-slide-up">
-              I'm a passionate full-stack developer specializing in building exceptional digital experiences.
-              I create intuitive, accessible web applications that balance beautiful design with robust functionality.
-              Currently focused on modern JavaScript frameworks, cloud technologies, and user-centered design.
-            </p>
-          </div>
+          {/* Professional description */}
+          <motion.p variants={itemVariants} className="text-lg text-gray-300 leading-relaxed max-w-3xl mb-14">
+            Full-stack developer specializing in enterprise solutions, modern JavaScript frameworks,
+            and cloud architecture. I architect and build scalable web applications that balance
+            exceptional user experiences with robust, maintainable code. Passionate about solving
+            complex problems and mentoring junior developers.
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row gap-6 items-center justify-center lg:justify-start mb-16">
-            <button
+          {/* CTA Buttons */}
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 items-start mb-16">
+            <a
+              href="#projects"
               onClick={(e) => scrollToSection(e, '#projects')}
-              className="btn-primary group flex items-center justify-center"
+              className="btn-primary group"
             >
-              View My Work
+              <span>View My Work</span>
               <ExternalLink className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-
-            <button
+            </a>
+            <a
+              href="#contact"
               onClick={(e) => scrollToSection(e, '#contact')}
-              className="btn-outline group flex items-center justify-center"
+              className="btn-outline group"
             >
-              Get In Touch
+              <span>Get In Touch</span>
               <Mail className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-            </button>
-          </div>
+            </a>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div variants={itemVariants} className="grid grid-cols-3 gap-8 mb-16 pb-16 border-b border-gray-800/30">
+            <div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent mb-2">2+</div>
+              <p className="text-sm text-gray-400">Years Experience</p>
+            </div>
+            <div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent mb-2">12+</div>
+              <p className="text-sm text-gray-400">Projects Shipped</p>
+            </div>
+            <div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent mb-2">15+</div>
+              <p className="text-sm text-gray-400">Prototypes Built</p>
+            </div>
+          </motion.div>
 
           {/* Social Links */}
-          <div className="flex items-center justify-center lg:justify-start space-x-6 mb-16">
-            {[
-              { icon: Github, href: 'https://github.com/bemnet884', label: 'GitHub' },
-              { icon: Linkedin, href: 'https://linkedin.com/in/bemnet-yitagesu', label: 'LinkedIn' },
-              { icon: Mail, href: 'mailto:bemnetyitagesu@gmail.com', label: 'Email' },
-            ].map((social, index) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300 hover:bg-primary-100 dark:hover:bg-primary-900/20 rounded-full transform hover:scale-110 hover:-translate-y-1"
-                aria-label={social.label}
-              >
-                <social.icon size={24} />
-              </a>
-            ))}
-          </div>
+          <motion.div variants={itemVariants} className="flex items-center space-x-6">
+            <span className="text-sm text-gray-500 font-mono">Connect:</span>
+            <a
+              href="https://github.com/bemnet884"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 text-gray-400 hover:text-blue-400 transition-colors hover:bg-blue-500/10 rounded-lg"
+              aria-label="GitHub"
+            >
+              <Github size={24} />
+            </a>
+            <a
+              href="https://linkedin.com/in/bemnet-yitagesu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 text-gray-400 hover:text-blue-400 transition-colors hover:bg-blue-500/10 rounded-lg"
+              aria-label="LinkedIn"
+            >
+              <Linkedin size={24} />
+            </a>
+            <a
+              href="mailto:bemnetyitagesu@gmail.com"
+              className="p-3 text-gray-400 hover:text-blue-400 transition-colors hover:bg-blue-500/10 rounded-lg"
+              aria-label="Email"
+            >
+              <Mail size={24} />
+            </a>
+          </motion.div>
+        </motion.div>
 
-          {/* Scroll Indicator */}
-          <div
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer animate-bounce-slow"
-            onClick={(e) => scrollToSection(e, '#about')}
-          >
-            <div className="flex flex-col items-center space-y-2 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-              <span className="text-sm font-mono">Scroll Down</span>
-              <ChevronDown size={20} />
-            </div>
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.5 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
+          onClick={(e) => scrollToSection(e, '#projects')}
+        >
+          <div className="flex flex-col items-center space-y-2 text-gray-500 hover:text-blue-400 transition-colors">
+            <span className="text-xs font-mono">SCROLL DOWN</span>
+            <ArrowDown size={20} className="animate-bounce" />
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

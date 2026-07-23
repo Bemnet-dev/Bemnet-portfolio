@@ -1,128 +1,96 @@
 'use client'
 
-import { Heart, Github, Linkedin, Mail, ArrowUp } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Github, Linkedin, Instagram, Twitter } from 'lucide-react'
 
 const Footer = () => {
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        })
-    }
+    const currentYear = new Date().getFullYear()
 
     const socialLinks = [
         { icon: Github, href: 'https://github.com/bemnet884', label: 'GitHub' },
         { icon: Linkedin, href: 'https://linkedin.com/in/bemnet-yitagesu', label: 'LinkedIn' },
-        { icon: Mail, href: 'mailto:bemnetyitagesu@gmail.com', label: 'Email' }
+        { icon: Instagram, href: '#', label: 'Instagram' },
+        { icon: Twitter, href: '#', label: 'Twitter' }
     ]
 
-    const quickLinks = [
-        { name: 'About', href: '#about' },
-        { name: 'Projects', href: '#projects' },
-        { name: 'Contact', href: '#contact' }
+    const footerLinks = [
+        { name: 'Work', path: '#projects' },
+        { name: 'Services', path: '#services' },
+        { name: 'About', path: '#about' },
+        { name: 'Contact', path: '#contact' }
     ]
 
     return (
-        <footer className="bg-gray-900 dark:bg-gray-950 text-gray-300 relative overflow-hidden">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-5">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(20,184,166,0.3),transparent_70%)]" />
-            </div>
-
-            <div className="container-max relative z-10">
-                {/* Main Footer Content */}
-                <div className="py-16 grid md:grid-cols-3 gap-8">
-                    {/* Brand Section */}
-                    <div className="space-y-4">
-                        <h3 className="text-2xl font-bold text-white">
-                            Bemnet Yitagesu
-                        </h3>
-                        <p className="text-gray-400 leading-relaxed">
-                            Full-stack developer passionate about creating exceptional digital experiences.
-                            Let&apos;s build something amazing together.
-                        </p>
-                        <div className="flex space-x-4">
-                            {socialLinks.map((social) => (
-                                <a
-                                    key={social.label}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="p-2 text-gray-400 hover:text-primary-400 transition-colors duration-300 transform hover:scale-110 hover:-translate-y-1"
-                                    aria-label={social.label}
-                                >
-                                    <social.icon size={20} />
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Quick Links */}
-                    <div className="space-y-4">
-                        <h4 className="text-lg font-semibold text-white">
-                            Quick Links
-                        </h4>
-                        <div className="space-y-2">
-                            {quickLinks.map((link) => (
-                                <button
-                                    key={link.name}
-                                    onClick={() => {
-                                        const element = document.querySelector(link.href)
-                                        if (element) {
-                                            const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 100
-                                            window.scrollTo({
-                                                top: offsetTop,
-                                                behavior: 'smooth'
-                                            })
-                                        }
-                                    }}
-                                    className="block text-gray-400 hover:text-primary-400 transition-colors duration-300 transform hover:translate-x-2"
-                                >
-                                    {link.name}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Contact Info */}
-                    <div className="space-y-4">
-                        <h4 className="text-lg font-semibold text-white">
-                            Get In Touch
-                        </h4>
-                        <div className="space-y-2 text-gray-400">
-                            <p>Addis Ababa, Ethiopia</p>
-                            <a
-                                href="mailto:bemnetyitagesu@gmail.com"
-                                className="hover:text-primary-400 transition-colors duration-300"
-                            >
-                                bemnetyitagesu@gmail.com
-                            </a>
-                            <p className="text-sm">
-                                Available for freelance opportunities
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Divider */}
-                <div className="border-t border-gray-800" />
-
-                {/* Bottom Footer */}
-                <div className="py-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                    <p className="text-gray-400 text-sm flex items-center space-x-1">
-                        <span>© 2024 Bemnet Yitagesu. Made with</span>
-                        <Heart size={16} className="text-red-500 fill-current animate-pulse" />
-                        <span>and Next.js</span>
-                    </p>
-
-                    {/* Back to Top Button */}
-                    <button
-                        onClick={scrollToTop}
-                        className="p-3 bg-primary-600 hover:bg-primary-700 text-white rounded-full transition-all duration-300 group transform hover:scale-110 hover:-translate-y-1"
-                        aria-label="Back to top"
+        <footer className="py-16 bg-black border-t border-white/10">
+            <div className="container-max">
+                <div className="flex flex-col items-center">
+                    {/* Name */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="mb-8"
                     >
-                        <ArrowUp size={20} className="group-hover:-translate-y-1 transition-transform duration-300" />
-                    </button>
+                        <h3 className="text-2xl font-bold text-white">BEMNET YITAGESU</h3>
+                    </motion.div>
+
+                    {/* Navigation Links */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        className="flex flex-wrap items-center justify-center gap-6 mb-8"
+                    >
+                        {footerLinks.map((link) => (
+                            <a
+                                key={link.name}
+                                href={link.path}
+                                className="text-gray-400 hover:text-white transition-colors"
+                            >
+                                {link.name}
+                            </a>
+                        ))}
+                    </motion.div>
+
+                    {/* Social Links */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="flex items-center justify-center gap-6 mb-8"
+                    >
+                        {socialLinks.map((social) => (
+                            <a
+                                key={social.label}
+                                href={social.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-3 text-gray-400 hover:text-white transition-colors"
+                                aria-label={social.label}
+                            >
+                                <social.icon size={20} />
+                            </a>
+                        ))}
+                    </motion.div>
+
+                    {/* Copyright */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="text-center"
+                    >
+                        <p className="text-gray-500 text-sm">
+                            &copy; {currentYear} Bemnet Yitagesu. All rights reserved.
+                        </p>
+                        <p className="text-gray-600 text-xs mt-2">
+                            Crafted by Bemnet Yitagesu
+                        </p>
+                    </motion.div>
                 </div>
             </div>
         </footer>

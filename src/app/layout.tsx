@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
-import { ThemeProvider } from '@/components/ThemeProvider'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -37,26 +36,8 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <head>
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                            try {
-                                const theme = localStorage.getItem('theme') || 'dark';
-                                if (theme === 'dark') {
-                                    document.documentElement.classList.add('dark');
-                                } else {
-                                    document.documentElement.classList.remove('dark');
-                                }
-                            } catch (e) {}
-                        `,
-                    }}
-                />
-            </head>
             <body className={`${inter.className} ${jetbrainsMono.variable}`}>
-                <ThemeProvider>
-                    {children}
-                </ThemeProvider>
+                {children}
             </body>
         </html>
     )

@@ -3,17 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 10, 10, 10;
+  --background-end-rgb: 0, 0, 0;
 }
 
 * {
@@ -28,9 +20,8 @@ html {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  background: #0a0a0a;
+  overflow-x: hidden;
 }
 
 @layer base {
@@ -45,11 +36,11 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center px-8 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-300 transform hover:scale-105 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-800;
+    @apply inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-700 to-blue-600 text-white rounded-full hover:from-blue-800 hover:to-blue-700 transition-all duration-300 font-medium shadow-lg hover:shadow-blue-700/50;
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center px-8 py-3 border-2 border-primary-600 text-primary-600 dark:text-primary-400 dark:border-primary-400 rounded-lg hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-gray-900 transition-all duration-300 transform hover:scale-105;
+    @apply inline-flex items-center justify-center px-8 py-4 border-2 border-blue-500/60 text-blue-400 rounded-full hover:bg-blue-500/10 transition-all duration-300 hover:border-blue-400;
   }
 
   .section-padding {
@@ -60,39 +51,29 @@ body {
     @apply max-w-7xl mx-auto;
   }
 
-  .text-gradient {
-    @apply bg-gradient-to-r from-primary-400 to-blue-500 bg-clip-text text-transparent;
-  }
-
   .card-hover {
-    @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+    @apply transition-all duration-300 hover:scale-[1.02];
   }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
+  @apply bg-black;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+  @apply bg-blue-600/40 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-500 dark:bg-gray-500;
+  @apply bg-blue-600/70;
 }
 
-/* Smooth fade-in animation for sections */
+/* Smooth animations */
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out forwards;
 }
@@ -123,43 +104,44 @@ body {
   }
 }
 
-/* Loading animation */
-.loading-dots {
-  display: inline-block;
+/* Gradient text */
+.gradient-text {
+  @apply bg-gradient-to-r from-blue-500 via-blue-400 to-indigo-500 bg-clip-text text-transparent;
 }
 
-.loading-dots:after {
-  content: '...';
-  animation: dots 1.5s steps(4, end) infinite;
+/* Hide scrollbar but allow scrolling */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-@keyframes dots {
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 
-  0%,
-  20% {
-    color: rgba(0, 0, 0, 0);
-    text-shadow:
-      .25em 0 0 rgba(0, 0, 0, 0),
-      .5em 0 0 rgba(0, 0, 0, 0);
-  }
+/* Background abstract shapes */
+.bg-abstract {
+  position: relative;
+}
 
-  40% {
-    color: white;
-    text-shadow:
-      .25em 0 0 rgba(0, 0, 0, 0),
-      .5em 0 0 rgba(0, 0, 0, 0);
-  }
+.bg-abstract::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(30, 58, 138, 0.25) 0%, transparent 70%);
+  top: -200px;
+  right: -200px;
+  pointer-events: none;
+}
 
-  60% {
-    text-shadow:
-      .25em 0 0 white,
-      .5em 0 0 rgba(0, 0, 0, 0);
-  }
-
-  80%,
-  100% {
-    text-shadow:
-      .25em 0 0 white,
-      .5em 0 0 white;
-  }
+.bg-abstract::after {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+  bottom: -100px;
+  left: -100px;
+  pointer-events: none;
 }

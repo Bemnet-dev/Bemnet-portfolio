@@ -1,9 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import Logo from './Logo'
-import ThemeToggle from './ThemeToggle'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -32,21 +32,27 @@ const Header = () => {
   }
 
   const navItems = [
+    { name: 'Work', path: '#projects' },
+    { name: 'Services', path: '#services' },
     { name: 'About', path: '#about' },
-    { name: 'Projects', path: '#projects' },
     { name: 'Contact', path: '#contact' }
   ]
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-500 ${scrolled
-      ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg border-b border-gray-200/20 dark:border-gray-700/20'
-      : 'bg-transparent'
-      }`}>
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
+        ? 'bg-black/80 backdrop-blur-md py-4'
+        : 'bg-transparent py-6'
+        }`}
+    >
       <div className="container-max">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between items-center">
           <div
             onClick={(e) => handleNavClick(e, '#hero')}
-            className="cursor-pointer transform hover:scale-105 transition-transform duration-300"
+            className="cursor-pointer"
           >
             <Logo />
           </div>
@@ -57,17 +63,24 @@ const Header = () => {
               <button
                 key={item.name}
                 onClick={(e) => handleNavClick(e, item.path)}
-                className="relative text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300 font-mono text-sm px-3 py-2 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/30"
+                className="text-sm text-gray-300 hover:text-white transition-colors duration-300"
               >
                 {item.name}
               </button>
             ))}
-            <ThemeToggle />
+            <a
+              href="/Bemnet_Yitagesu_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm px-4 py-2 border border-white/30 rounded-full hover:bg-white/10 transition-all duration-300"
+            >
+              Check out my CV
+            </a>
           </nav>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors transform hover:scale-110 active:scale-90"
+            className="md:hidden p-2 text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -76,30 +89,39 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden transition-all duration-300 ${isMenuOpen
-        ? 'max-h-64 opacity-100'
-        : 'max-h-0 opacity-0 overflow-hidden'
-        }`}>
-        <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200/20 dark:border-gray-700/20">
-          <div className="container-max py-4">
-            <div className="flex flex-col space-y-2">
-              {navItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={(e) => handleNavClick(e, item.path)}
-                  className="text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-all duration-300 font-mono"
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-black/95 backdrop-blur-md"
+          >
+            <div className="container-max py-6">
+              <div className="flex flex-col space-y-4">
+                {navItems.map((item) => (
+                  <button
+                    key={item.name}
+                    onClick={(e) => handleNavClick(e, item.path)}
+                    className="text-left text-lg text-gray-300 hover:text-white transition-colors"
+                  >
+                    {item.name}
+                  </button>
+                ))}
+                <a
+                  href="/Bemnet_Yitagesu_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-left text-lg px-4 py-2 border border-white/30 rounded-full hover:bg-white/10 transition-all duration-300 w-fit"
                 >
-                  {item.name}
-                </button>
-              ))}
-              <div className="px-4 py-2">
-                <ThemeToggle />
+                  Check out my CV
+                </a>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </header>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   )
 }
 

@@ -5,15 +5,28 @@ import { useTheme } from './ThemeProvider'
 import { useEffect, useState } from 'react'
 
 const ThemeToggle = () => {
-  const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+
+  // Safely access theme context
+  let theme: 'light' | 'dark' = 'dark'
+  let setTheme: (theme: 'light' | 'dark') => void = () => { }
+
+  try {
+    const context = useTheme()
+    theme = context.theme
+    setTheme = context.setTheme
+  } catch (error) {
+    // Theme context not available during SSR
+  }
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
   if (!mounted) {
-    return <div className="w-12 h-6 bg-gray-300 dark:bg-gray-600 rounded-full" />
+    return (
+      <div className="w-12 h-6 bg-gray-300 dark:bg-gray-600 rounded-full animate-pulse" />
+    )
   }
 
   const isDark = theme === 'dark'

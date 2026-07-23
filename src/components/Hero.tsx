@@ -21,10 +21,11 @@ const Hero = () => {
     return () => clearInterval(timer)
   }, [])
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
+    e.preventDefault()
     const element = document.querySelector(sectionId)
     if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 100
+      const offsetTop = element.getBoundingClientRect().top + window.scrollY - 80
       window.scrollTo({
         top: offsetTop,
         behavior: 'smooth'
@@ -58,9 +59,9 @@ const Hero = () => {
           </div>
 
           <div className="mb-8">
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-600 dark:text-gray-400 mb-6 min-h-[1.5em]">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-600 dark:text-gray-400 mb-6">
               <span className="text-gradient">{typewriterText}</span>
-              <span className="text-primary-500 animate-pulse">|</span>
+              <span className="text-primary-500 animate-pulse inline-block ml-1">|</span>
             </h2>
           </div>
 
@@ -74,16 +75,16 @@ const Hero = () => {
 
           <div className="flex flex-col sm:flex-row gap-6 items-center justify-center lg:justify-start mb-16">
             <button
-              onClick={() => scrollToSection('#projects')}
-              className="btn-primary group"
+              onClick={(e) => scrollToSection(e, '#projects')}
+              className="btn-primary group flex items-center justify-center"
             >
               View My Work
               <ExternalLink className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </button>
 
             <button
-              onClick={() => scrollToSection('#contact')}
-              className="btn-outline group"
+              onClick={(e) => scrollToSection(e, '#contact')}
+              className="btn-outline group flex items-center justify-center"
             >
               Get In Touch
               <Mail className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
@@ -113,7 +114,7 @@ const Hero = () => {
           {/* Scroll Indicator */}
           <div
             className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer animate-bounce-slow"
-            onClick={() => scrollToSection('#about')}
+            onClick={(e) => scrollToSection(e, '#about')}
           >
             <div className="flex flex-col items-center space-y-2 text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
               <span className="text-sm font-mono">Scroll Down</span>

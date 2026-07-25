@@ -1,7 +1,20 @@
 'use client'
 
 import { motion, Variants } from 'framer-motion'
-import { Globe, Palette, Code, Figma, Cpu, Lightbulb, Briefcase, Rocket } from 'lucide-react'
+import { Globe, Palette, Code, Figma, Smartphone, Lightbulb, Briefcase, Rocket } from 'lucide-react'
+import { AnimatedBackground } from './AnimatedBackground'
+import { ParallaxSection, ParallaxText } from './ParallaxSection'
+
+const ExpoIcon = () => (
+    <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="3" width="18" height="18" rx="4" fill="currentColor" opacity="0.1" />
+        <circle cx="12" cy="12" r="3" fill="currentColor" />
+        <circle cx="12" cy="7" r="1.5" fill="currentColor" />
+        <circle cx="12" cy="17" r="1.5" fill="currentColor" />
+        <circle cx="7" cy="12" r="1.5" fill="currentColor" />
+        <circle cx="17" cy="12" r="1.5" fill="currentColor" />
+    </svg>
+)
 
 const services = [
     {
@@ -25,9 +38,9 @@ const services = [
         description: 'Creating visually stunning and responsive websites that tell a compelling brand story and drive conversions.'
     },
     {
-        icon: Cpu,
-        title: 'Industrial Design',
-        description: 'Developing innovative physical products from concept to prototype using tools like Fusion 360.'
+        icon: Smartphone,
+        title: 'Mobile App Development',
+        description: 'Building cross-platform mobile applications with React Native and Expo for iOS and Android.'
     },
     {
         icon: Lightbulb,
@@ -67,52 +80,57 @@ const Services = () => {
     }
 
     return (
-        <section id="services" className="min-h-screen py-32 bg-black">
-            <div className="container-max">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-16"
-                >
-                    <p className="text-blue-500 text-lg mb-4 font-semibold">WHAT I DO</p>
-                    <h2 className="text-4xl sm:text-5xl font-bold text-white">
-                        A Spectrum of Expertise.
-                    </h2>
-                    <p className="text-gray-400 mt-6 max-w-2xl">
-                        From digital interfaces to physical products, I provide a comprehensive suite
-                        of design and development services to bring your vision to life.
-                    </p>
-                </motion.div>
+        <section id="services" className="min-h-screen py-16 sm:py-24 md:py-32 bg-black relative overflow-hidden">
+            <AnimatedBackground />
 
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-100px" }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-                >
-                    {services.map((service, index) => (
-                        <motion.div
-                            key={service.title}
-                            variants={itemVariants}
-                            className="group bg-gradient-to-br from-blue-600/15 to-indigo-600/5 border border-blue-500/30 rounded-2xl p-6 card-hover hover:border-blue-500/60"
-                        >
-                            <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-white/20 transition-colors">
-                                <service.icon size={24} className="text-white" />
-                            </div>
+            <div className="container-max px-4 sm:px-6 md:px-8 relative z-10">
+                <ParallaxText speed={0.3} className="mb-8 sm:mb-12 md:mb-16">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <p className="text-blue-500 text-xs sm:text-sm md:text-base mb-2 sm:mb-3 md:mb-4 font-semibold">WHAT I DO</p>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+                            A Spectrum of Expertise.
+                        </h2>
+                        <p className="text-gray-400 mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base">
+                            From digital interfaces to physical products, I provide a comprehensive suite
+                            of design and development services to bring your vision to life.
+                        </p>
+                    </motion.div>
+                </ParallaxText>
 
-                            <h3 className="text-xl font-semibold text-white mb-3">
-                                {service.title}
-                            </h3>
+                <ParallaxSection speed={0.2}>
+                    <motion.div
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
+                    >
+                        {services.map((service, index) => (
+                            <motion.div
+                                key={service.title}
+                                variants={itemVariants}
+                                className="group bg-gradient-to-br from-blue-600/15 to-indigo-600/5 border border-blue-500/30 rounded-xl sm:rounded-2xl p-4 sm:p-6 card-hover hover:border-blue-500/60"
+                            >
+                                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-white/10 rounded-lg flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-white/20 transition-colors">
+                                    <service.icon size={20} className="sm:w-6 sm:h-6 text-white" />
+                                </div>
 
-                            <p className="text-gray-400 text-sm leading-relaxed">
-                                {service.description}
-                            </p>
-                        </motion.div>
-                    ))}
-                </motion.div>
+                                <h3 className="text-base sm:text-lg md:text-xl font-semibold text-white mb-2 sm:mb-3">
+                                    {service.title}
+                                </h3>
+
+                                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                    {service.description}
+                                </p>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </ParallaxSection>
             </div>
         </section>
     )

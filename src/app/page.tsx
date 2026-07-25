@@ -6,6 +6,7 @@ import Hero from '@/components/Hero'
 import Projects from '@/components/Projects'
 import Services from '@/components/Services'
 import About from '@/components/About'
+import Skills from '@/components/Skills'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 
@@ -21,6 +22,8 @@ export default function Home() {
             <Services />
 
             <About />
+
+            <Skills />
 
             <Contact />
 

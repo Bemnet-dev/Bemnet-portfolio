@@ -1,0 +1,20 @@
+# Robots.txt for Bemnet Yitagesu Portfolio
+User-agent: *
+Allow: /
+Disallow: /.next/
+Disallow: /node_modules/
+
+# Sitemaps
+Sitemap: https://bemnet-portfolio.com/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
+
+# Specific rules for search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1

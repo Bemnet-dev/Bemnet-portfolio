@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
@@ -8,24 +8,66 @@ const jetbrainsMono = JetBrains_Mono({
     variable: '--font-mono'
 })
 
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1.0,
+    maximumScale: 5.0,
+    themeColor: '#000000',
+}
+
 export const metadata: Metadata = {
-    title: 'Bemnet Yitagesu - Full Stack Developer',
-    description: 'Portfolio website of Bemnet Yitagesu, a passionate full-stack developer specializing in modern web technologies.',
-    keywords: ['Bemnet Yitagesu', 'Full Stack Developer', 'React', 'Next.js', 'TypeScript', 'Portfolio'],
-    authors: [{ name: 'Bemnet Yitagesu' }],
+    title: 'Bemnet Yitagesu | Full Stack Developer & Mobile App Developer',
+    description: 'Bemnet Yitagesu is a full-stack developer specializing in web and mobile app development. Building digital experiences with React, Next.js, React Native, and Expo.',
+    keywords: [
+        'Bemnet Yitagesu',
+        'Full Stack Developer',
+        'Mobile App Developer',
+        'React',
+        'Next.js',
+        'React Native',
+        'Expo',
+        'TypeScript',
+        'Web Development',
+        'Portfolio',
+        'Webflow Development',
+        'UI/UX Design'
+    ],
+    authors: [{ name: 'Bemnet Yitagesu', url: 'https://bemnet-portfolio.com' }],
     creator: 'Bemnet Yitagesu',
+    publisher: 'Bemnet Yitagesu',
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+    },
     openGraph: {
         type: 'website',
         locale: 'en_US',
         url: 'https://bemnet-portfolio.com',
-        title: 'Bemnet Yitagesu - Full Stack Developer',
-        description: 'Portfolio website of Bemnet Yitagesu, a passionate full-stack developer.',
         siteName: 'Bemnet Yitagesu Portfolio',
+        title: 'Bemnet Yitagesu | Full Stack Developer & Mobile App Developer',
+        description: 'Portfolio of Bemnet Yitagesu - Full Stack Developer specializing in web and mobile applications',
+        images: [
+            {
+                url: 'https://bemnet-portfolio.com/og-image.png',
+                width: 1200,
+                height: 630,
+                alt: 'Bemnet Yitagesu Portfolio',
+            },
+        ],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Bemnet Yitagesu - Full Stack Developer',
-        description: 'Portfolio website of Bemnet Yitagesu, a passionate full-stack developer.',
+        title: 'Bemnet Yitagesu | Full Stack Developer & Mobile App Developer',
+        description: 'Portfolio of Bemnet Yitagesu - Full Stack Developer specializing in web and mobile applications',
+        creator: '@bemnetyitagesu',
+        images: ['https://bemnet-portfolio.com/og-image.png'],
     },
 }
 

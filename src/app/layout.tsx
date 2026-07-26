@@ -35,6 +35,9 @@ export const metadata: Metadata = {
     authors: [{ name: 'Bemnet Yitagesu', url: 'https://bemnet-portfolio.com' }],
     creator: 'Bemnet Yitagesu',
     publisher: 'Bemnet Yitagesu',
+    icons: {
+        icon: '/favicon.ico',
+    },
     robots: {
         index: true,
         follow: true,

@@ -20,10 +20,10 @@ const Header = () => {
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
-      
+
       const sections = ['#hero', '#projects', '#services', '#about', '#contact']
       const scrollPosition = window.scrollY + 250 // offset to trigger slightly early
-      
+
       for (const section of sections) {
         const el = document.querySelector(section)
         if (el) {
@@ -141,11 +141,10 @@ const Header = () => {
                   <button
                     key={item.name}
                     onClick={(e) => handleNavClick(e, item.path)}
-                    className={`text-left text-base font-semibold px-4 py-2.5 rounded-xl transition-all duration-300 ${
-                      isActive 
-                        ? 'bg-[#2563eb] text-white' 
+                    className={`text-left text-base font-semibold px-4 py-2.5 rounded-xl transition-all duration-300 ${isActive
+                        ? 'bg-[#2563eb] text-white'
                         : 'text-gray-300 hover:text-white hover:bg-white/5'
-                    }`}
+                      }`}
                   >
                     {item.name}
                   </button>

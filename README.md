@@ -2,8 +2,6 @@
 
 A modern, responsive portfolio website built with Next.js 14, TypeScript, and Tailwind CSS. Features smooth animations, dark mode, and an elegant design showcasing projects and skills.
 
-![Portfolio Preview](https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=600)
-
 ## ✨ Features
 
 - **Modern Design** - Clean, professional interface with smooth animations
@@ -50,34 +48,6 @@ A modern, responsive portfolio website built with Next.js 14, TypeScript, and Ta
    # or
    pnpm dev
    ```
-
-4. **Open in browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## 📁 Project Structure
-
-```
-src/
-├── app/                    # Next.js 14 App Router
-│   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout
-│   ├── page.tsx          # Homepage
-│   ├── loading.tsx       # Loading UI
-│   └── not-found.tsx     # 404 page
-├── components/            # React components
-│   ├── Header.tsx        # Navigation header
-│   ├── Hero.tsx          # Hero section
-│   ├── About.tsx         # About section
-│   ├── Projects.tsx      # Projects showcase
-│   ├── Contact.tsx       # Contact form
-│   ├── Footer.tsx        # Footer
-│   ├── Logo.tsx          # Logo component
-│   ├── ThemeToggle.tsx   # Dark mode toggle
-│   └── CursorEffect.tsx  # Custom cursor
-├── utils/                # Utility functions
-│   └── cn.ts            # Class name utility
-└── types/               # TypeScript definitions
-```
 
 ## 🎨 Customization
 

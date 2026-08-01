@@ -7,49 +7,48 @@ import { ParallaxSection, ParallaxText } from './ParallaxSection'
 
 const projects = [
     {
-        name: 'TEBAREK',
-        roles: ['Creative Direction', 'Web Design', 'Webflow Development'],
-        description: 'Experience smarter financial insights designed for freelancers and small businesses. Spot trends, forecast with clarity, and get friendly support anytime.',
-        timeline: '1 Week',
-        myRole: 'Web Designer',
-        link: '#',
-        color: 'from-blue-600 to-blue-800'
+        name: 'Hulu Properties',
+        roles: ['Web Design', 'Front-End Development', 'Product UX'],
+        description: 'A premium real estate marketplace for luxury houses, land, and vehicles with polished listing discovery and secure contact workflows.',
+        timeline: '2 Weeks',
+        myRole: 'Design + Front-End',
+        link: 'https://huluproperties.vercel.app',
+        color: 'from-emerald-600 to-slate-900',
+        technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Vercel'],
+        screenshot: 'https://s.wordpress.com/mshots/v1/https://huluproperties.vercel.app?w=1200'
     },
     {
-        name: 'LA MONJE',
-        roles: ['Web Development', 'Post Production'],
-        description: 'La Monje is a creative agency specializing in brand strategy, digital marketing, and event activation.',
-        timeline: '1 Week',
-        myRole: 'Web Design, Web Development',
-        link: '#',
-        color: 'from-indigo-600 to-blue-800'
+        name: 'FitMarket',
+        roles: ['Product Design', 'Web Development', 'Marketplace Experience'],
+        description: 'A fitness marketplace connecting clients with elite trainers, gym instructors, and nutritionists through seamless booking flows and profile discovery.',
+        timeline: '2 Weeks',
+        myRole: 'Full-Stack Front-End',
+        link: 'https://fitmarket.bemnet.vercel.app',
+        color: 'from-cyan-500 to-slate-800',
+        technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Vercel'],
+        screenshot: 'https://s.wordpress.com/mshots/v1/https://fitmarket.bemnet.vercel.app?w=1200'
     },
     {
-        name: 'DURASEAL LTD',
-        roles: ['Web Design', 'Webflow Development'],
-        description: 'DuraSeal Ltd specializes in high-performance wood floor coatings, offering products like DuraSeal Quick Coat and water-based finishes.',
-        timeline: '3 Weeks',
-        myRole: 'Web Design, Webflow Development',
-        link: '#',
-        color: 'from-blue-700 to-indigo-900'
+        name: 'Eventrix',
+        roles: ['Web App Development', 'Brand Experience', 'Ticketing UI'],
+        description: 'A premium event ticketing platform with fast booking, event discovery, and secure sign-in flows designed for memorable live experiences.',
+        timeline: '2 Weeks',
+        myRole: 'Front-End Development',
+        link: 'https://eventrix.bemnet.vercel.app',
+        color: 'from-violet-600 to-slate-900',
+        technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Vercel'],
+        screenshot: 'https://s.wordpress.com/mshots/v1/https://eventrix.bemnet.vercel.app?w=1200'
     },
     {
-        name: 'HOMNA LTD',
-        roles: ['Creative Direction', 'Web Development'],
-        description: 'Homna Ltd is a leading provider of construction chemicals, drainage systems, and finishing materials in East Africa.',
-        timeline: '4 Weeks',
-        myRole: 'Web Design, Web Dev',
-        link: '#',
-        color: 'from-indigo-700 to-blue-900'
-    },
-    {
-        name: 'IMPACT4AFRICA',
-        roles: ['Web Development'],
-        description: 'Impact4Africa is an impact investment company focused on developing the agricultural value chain in Rwanda and Namibia.',
-        timeline: '1 Week',
-        myRole: 'Web Design, Web Dev',
-        link: '#',
-        color: 'from-blue-600 to-indigo-800'
+        name: 'BookNow Azure',
+        roles: ['Travel UI', 'Booking Platform', 'Responsive Design'],
+        description: 'A vacation booking platform for hotels and holiday stays, purpose-built to showcase destinations and simplify reservations for travelers.',
+        timeline: '2 Weeks',
+        myRole: 'Web Design + Dev',
+        link: 'https://booknow-azure.vercel.app',
+        color: 'from-sky-500 to-slate-900',
+        technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Vercel'],
+        screenshot: 'https://s.wordpress.com/mshots/v1/https://booknow-azure.vercel.app?w=1200'
     }
 ]
 
@@ -97,28 +96,15 @@ const Projects = () => {
                     >
                         <div className="bg-gradient-to-br from-blue-600/15 to-indigo-600/5 border border-blue-500/30 rounded-xl sm:rounded-2xl overflow-hidden hover:border-blue-500/60 transition-all duration-300 group h-full flex flex-col">
                             {/* Featured Image Area */}
-                            <div className={`h-48 sm:h-56 md:h-64 lg:h-72 bg-gradient-to-br ${currentProject.color} relative overflow-hidden flex-shrink-0`}>
-                                <motion.div
-                                    animate={{
-                                        background: [
-                                            'radial-gradient(circle at 0% 0%, rgba(255,255,255,0.15) 0%, transparent 50%)',
-                                            'radial-gradient(circle at 100% 100%, rgba(255,255,255,0.15) 0%, transparent 50%)',
-                                            'radial-gradient(circle at 0% 0%, rgba(255,255,255,0.15) 0%, transparent 50%)'
-                                        ]
-                                    }}
-                                    transition={{ duration: 5, repeat: Infinity }}
-                                    className="absolute inset-0"
+                            <div className="relative overflow-hidden rounded-3xl h-56 sm:h-64 md:h-72 lg:h-80 bg-slate-950">
+                                <img
+                                    src={currentProject.screenshot}
+                                    alt={`Screenshot of ${currentProject.name}`}
+                                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
                                 />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="text-center">
-                                        <motion.div
-                                            animate={{ y: [0, -8, 0] }}
-                                            transition={{ duration: 3, repeat: Infinity }}
-                                            className="text-white font-bold text-5xl opacity-70"
-                                        >
-                                            {currentProject.name}
-                                        </motion.div>
-                                    </div>
+                                <div className="absolute inset-0 bg-slate-950/35" />
+                                <div className="absolute left-4 top-4 inline-flex items-center gap-2 bg-slate-950/80 text-white px-3 py-2 rounded-full text-xs uppercase tracking-[0.22em]">
+                                    Screenshot Preview
                                 </div>
                             </div>
 
@@ -132,9 +118,20 @@ const Projects = () => {
                                     {currentProject.roles.map((role) => (
                                         <span
                                             key={role}
-                                            className="px-2 sm:px-3 py-1 text-xs uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full"
+                                            className="px-2 sm:px-3 py-1 text-xs uppercase tracking-wider text-slate-100 bg-slate-700/20 border border-slate-600 rounded-full"
                                         >
                                             {role}
+                                        </span>
+                                    ))}
+                                </div>
+
+                                <div className="flex flex-wrap gap-2 mb-4">
+                                    {currentProject.technologies.map((tech) => (
+                                        <span
+                                            key={tech}
+                                            className="px-2 sm:px-3 py-1 text-xs uppercase tracking-wider text-slate-100 bg-blue-500/10 border border-blue-500/20 rounded-full"
+                                        >
+                                            {tech}
                                         </span>
                                     ))}
                                 </div>

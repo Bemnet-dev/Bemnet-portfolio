@@ -5,7 +5,6 @@ import { motion, Variants } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react'
 import { AnimatedBackground } from './AnimatedBackground'
 import { ParallaxText } from './ParallaxSection'
-import { CVModal } from './CVModal'
 
 const Hero = () => {
   const [isCVOpen, setIsCVOpen] = useState(false)

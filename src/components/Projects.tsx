@@ -7,46 +7,6 @@ import { ParallaxSection } from './ParallaxSection'
 
 const projects = [
     {
-<<<<<<< HEAD
-        name: 'HULU PROPERTIES',
-        roles: ['Web Design', 'Web Development'],
-        description: 'A modern real estate platform showcasing properties with advanced filtering, search functionality, and property management features.',
-        timeline: '2 Weeks',
-        myRole: 'Full Stack Developer',
-        link: 'https://huluproperties.vercel.app/',
-        image: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749163/Screenshot_2026-08-25_193002_rxcvwg.png',
-        color: 'from-blue-600 to-blue-800'
-    },
-    {
-        name: 'BOOKNOW',
-        roles: ['Web Development', 'Booking System'],
-        description: 'A comprehensive booking and appointment scheduling platform with real-time availability, payment integration, and customer management.',
-        timeline: '2 Weeks',
-        myRole: 'Full Stack Developer',
-        link: 'https://booknow-azure.vercel.app/',
-        image: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749158/Screenshot_2026-08-25_193115_whq0kb.png',
-        color: 'from-purple-600 to-blue-800'
-    },
-    {
-        name: 'EVENTRIX',
-        roles: ['Web Development', 'Frontend Design'],
-        description: 'An event management and ticketing platform allowing users to create, manage, and attend events with seamless booking integration.',
-        timeline: '3 Weeks',
-        myRole: 'Full Stack Developer',
-        link: 'https://eventrix.bemnet.vercel.app/',
-        image: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749158/Screenshot_2026-08-25_193047_eeqqup.png',
-        color: 'from-indigo-600 to-blue-800'
-    },
-    {
-        name: 'FITMARKET',
-        roles: ['Web Development', 'E-commerce Design'],
-        description: 'A fitness and wellness e-commerce platform featuring product listings, shopping cart functionality, and secure checkout integration.',
-        timeline: '2 Weeks',
-        myRole: 'Full Stack Developer',
-        link: 'https://fitmarket.bemnet.vercel.app/',
-        image: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749157/Screenshot_2026-08-25_193023_ikfxwx.png',
-        color: 'from-blue-700 to-indigo-900'
-=======
         name: 'Hulu Properties',
         roles: ['Web Design', 'Front-End Development', 'Product UX'],
         description: 'A premium real estate marketplace for luxury houses, land, and vehicles with polished listing discovery and secure contact workflows.',
@@ -55,7 +15,8 @@ const projects = [
         link: 'https://huluproperties.vercel.app',
         color: 'from-emerald-600 to-slate-900',
         technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Vercel'],
-        screenshot: 'https://s.wordpress.com/mshots/v1/https://huluproperties.vercel.app?w=1200'
+        image: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749163/Screenshot_2026-08-25_193002_rxcvwg.png',
+        screenshot: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749163/Screenshot_2026-08-25_193002_rxcvwg.png'
     },
     {
         name: 'FitMarket',
@@ -66,18 +27,20 @@ const projects = [
         link: 'https://fitmarket.bemnet.vercel.app',
         color: 'from-cyan-500 to-slate-800',
         technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Vercel'],
-        screenshot: 'https://s.wordpress.com/mshots/v1/https://fitmarket.bemnet.vercel.app?w=1200'
+        image: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749157/Screenshot_2026-08-25_193023_ikfxwx.png',
+        screenshot: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749157/Screenshot_2026-08-25_193023_ikfxwx.png'
     },
     {
         name: 'Eventrix',
         roles: ['Web App Development', 'Brand Experience', 'Ticketing UI'],
-        description: 'A premium event ticketing platform with fast booking, event discovery, and secure sign-in flows designed for memorable live experiences.',
+        description: 'An event management and ticketing platform allowing users to create, manage, and attend events with seamless booking integration.',
         timeline: '2 Weeks',
         myRole: 'Front-End Development',
         link: 'https://eventrix.bemnet.vercel.app',
         color: 'from-violet-600 to-slate-900',
         technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Vercel'],
-        screenshot: 'https://s.wordpress.com/mshots/v1/https://eventrix.bemnet.vercel.app?w=1200'
+        image: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749158/Screenshot_2026-08-25_193047_eeqqup.png',
+        screenshot: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749158/Screenshot_2026-08-25_193047_eeqqup.png'
     },
     {
         name: 'BookNow Azure',
@@ -88,8 +51,8 @@ const projects = [
         link: 'https://booknow-azure.vercel.app',
         color: 'from-sky-500 to-slate-900',
         technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Vercel'],
-        screenshot: 'https://s.wordpress.com/mshots/v1/https://booknow-azure.vercel.app?w=1200'
->>>>>>> bbaf421362787dd45398975425e219d19ba842ab
+        image: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749158/Screenshot_2026-08-25_193115_whq0kb.png',
+        screenshot: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749158/Screenshot_2026-08-25_193115_whq0kb.png'
     }
 ]
 
@@ -178,84 +141,63 @@ const Projects = () => {
                         transition={{ duration: 0.6 }}
                         className="lg:col-span-8 w-full order-2 lg:order-1"
                     >
-<<<<<<< HEAD
-                        <div className="bg-gradient-to-br from-blue-600/15 to-indigo-600/5 border border-blue-500/30 rounded-2xl overflow-hidden transition-all duration-300 group">
-                            {/* Featured Website Preview Area */}
-                            <div className="relative overflow-hidden">
-                                {currentProject.image ? (
-                                    <motion.img
-                                        key={currentProject.image}
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ duration: 1.5 }}
-                                        src={currentProject.image}
-                                        alt={currentProject.name}
-                                        className="w-full h-auto block object-contain"
-                                    />
-                                ) : (
-                                    <div className={`h-96 sm:h-[500px] md:h-[600px] bg-gradient-to-br ${currentProject.color} relative overflow-hidden flex items-center justify-center`}>
-                                        <motion.div
-                                            animate={{ y: [0, -8, 0] }}
-                                            transition={{ duration: 3, repeat: Infinity }}
-                                            className="text-white font-bold text-4xl opacity-70"
-                                        >
-                                            {currentProject.name}
-                                        </motion.div>
-                                    </div>
-                                )}
-=======
                         <div className="bg-gradient-to-br from-blue-600/15 to-indigo-600/5 border border-blue-500/30 rounded-xl sm:rounded-2xl overflow-hidden hover:border-blue-500/60 transition-all duration-300 group h-full flex flex-col">
                             {/* Featured Image Area */}
-                            <div className="relative overflow-hidden rounded-3xl h-56 sm:h-64 md:h-72 lg:h-80 bg-slate-950">
-                                <img
-                                    src={currentProject.screenshot}
-                                    alt={`Screenshot of ${currentProject.name}`}
-                                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
-                                />
-                                <div className="absolute inset-0 bg-slate-950/35" />
-                                <div className="absolute left-4 top-4 inline-flex items-center gap-2 bg-slate-950/80 text-white px-3 py-2 rounded-full text-xs uppercase tracking-[0.22em]">
+                            <div className="relative overflow-hidden h-56 sm:h-64 md:h-72 lg:h-80 bg-slate-950">
+                                {currentProject.image || currentProject.screenshot ? (
+                                    <motion.img
+                                        key={currentProject.image || currentProject.screenshot}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 0.5 }}
+                                        src={currentProject.image || currentProject.screenshot}
+                                        alt={`Screenshot of ${currentProject.name}`}
+                                        className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                ) : (
+                                    <div className={`h-full bg-gradient-to-br ${currentProject.color} flex items-center justify-center`}>
+                                        <div className="text-white font-bold text-4xl opacity-70">
+                                            {currentProject.name}
+                                        </div>
+                                    </div>
+                                )}
+                                <div className="absolute inset-0 bg-slate-950/20" />
+                                <div className="absolute left-4 top-4 inline-flex items-center gap-2 bg-slate-950/80 text-white px-3 py-1.5 rounded-full text-xs uppercase tracking-wider border border-white/10">
                                     Screenshot Preview
                                 </div>
->>>>>>> bbaf421362787dd45398975425e219d19ba842ab
                             </div>
 
                             {/* Content */}
-                            <div className="p-6 sm:p-8 md:p-10 flex flex-col">
+                            <div className="p-6 sm:p-8 md:p-10 flex flex-col flex-1">
                                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-5 transition-colors">
                                     {currentProject.name}
                                 </h3>
 
-                                <div className="flex flex-wrap gap-2 mb-6 sm:mb-8">
+                                <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
                                     {currentProject.roles.map((role) => (
                                         <span
                                             key={role}
-<<<<<<< HEAD
                                             className="px-3 py-1.5 text-xs uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/30 rounded-full font-medium"
-=======
-                                            className="px-2 sm:px-3 py-1 text-xs uppercase tracking-wider text-slate-100 bg-slate-700/20 border border-slate-600 rounded-full"
->>>>>>> bbaf421362787dd45398975425e219d19ba842ab
                                         >
                                             {role}
                                         </span>
                                     ))}
                                 </div>
 
-<<<<<<< HEAD
-                                <p className="text-gray-400 text-base sm:text-lg leading-relaxed mb-8 sm:mb-10">
-=======
-                                <div className="flex flex-wrap gap-2 mb-4">
-                                    {currentProject.technologies.map((tech) => (
-                                        <span
-                                            key={tech}
-                                            className="px-2 sm:px-3 py-1 text-xs uppercase tracking-wider text-slate-100 bg-blue-500/10 border border-blue-500/20 rounded-full"
-                                        >
-                                            {tech}
-                                        </span>
-                                    ))}
-                                </div>
+                                {currentProject.technologies && (
+                                    <div className="flex flex-wrap gap-2 mb-4">
+                                        {currentProject.technologies.map((tech) => (
+                                            <span
+                                                key={tech}
+                                                className="px-2 sm:px-3 py-1 text-xs uppercase tracking-wider text-slate-100 bg-blue-500/10 border border-blue-500/20 rounded-full"
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
 
-                                <p className="text-gray-400 text-base sm:text-lg md:text-lg mb-6 sm:mb-8 leading-relaxed flex-1">
->>>>>>> bbaf421362787dd45398975425e219d19ba842ab
+                                <p className="text-gray-400 text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed flex-1">
                                     {currentProject.description}
                                 </p>
 

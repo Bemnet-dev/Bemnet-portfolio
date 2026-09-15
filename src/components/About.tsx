@@ -5,8 +5,8 @@ import { ParallaxText } from './ParallaxSection'
 
 const About = () => {
   return (
-    <section id="about" className="py-16 sm:py-20 md:py-24 lg:py-32 bg-black">
-      <div className="container-max px-4 sm:px-6 md:px-8">
+    <section id="about" className="py-0 bg-black">
+      <div className="container-max pt-[55px] pb-[20px] pl-[33px] pr-4 sm:pr-6 md:pr-8">
         <ParallaxText speed={0.3}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}

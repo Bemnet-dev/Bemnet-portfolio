@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import Link from 'next/link'
 import Logo from './Logo'
 
 const Header = () => {
@@ -105,12 +106,13 @@ const Header = () => {
               </div>
             )
           })}
-          <a
+          <Link
             href="/cv"
+            prefetch={false}
             className="text-xs lg:text-sm px-4 py-2 border border-white/15 rounded-full hover:bg-white/10 text-gray-300 hover:text-white transition-all duration-300 font-medium ml-1"
           >
             CV
-          </a>
+          </Link>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -148,12 +150,14 @@ const Header = () => {
                   </button>
                 )
               })}
-              <a
+              <Link
                 href="/cv"
-                className="text-center text-base px-4 py-2.5 border border-white/15 rounded-xl hover:bg-white/10 text-gray-300 hover:text-white transition-all duration-300 font-medium w-full mt-2"
+                prefetch={false}
+                onClick={() => setIsMenuOpen(false)}
+                className="text-center text-base px-4 py-2.5 border border-white/15 rounded-xl hover:bg-white/10 text-gray-300 hover:text-white transition-all duration-300 font-medium w-full mt-2 block"
               >
-                Check out my CV
-              </a>
+                CV
+              </Link>
             </div>
           </motion.div>
         )}

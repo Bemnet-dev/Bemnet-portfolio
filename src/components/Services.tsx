@@ -80,7 +80,7 @@ const Services = () => {
     }
 
     return (
-        <section id="services" className="min-h-screen py-16 sm:py-24 md:py-32 bg-black relative overflow-hidden">
+        <section id="services" className="min-h-screen py-0 bg-black relative overflow-hidden">
             <CSSBackground />
 
             <div className="container-max px-4 sm:px-6 md:px-8 relative z-10">

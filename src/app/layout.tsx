@@ -86,6 +86,27 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" suppressHydrationWarning>
+            <head>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            if (typeof window !== 'undefined') {
+                                window.addEventListener('error', function(e) {
+                                    var msg = (e && e.message) || '';
+                                    if (msg.indexOf('Loading chunk') !== -1 || msg.indexOf('ChunkLoadError') !== -1) {
+                                        var retryKey = 'chunk_reload_count';
+                                        var count = parseInt(sessionStorage.getItem(retryKey) || '0', 10);
+                                        if (count < 2) {
+                                            sessionStorage.setItem(retryKey, (count + 1).toString());
+                                            window.location.reload();
+                                        }
+                                    }
+                                });
+                            }
+                        `,
+                    }}
+                />
+            </head>
             <body className={`${inter.className} ${jetbrainsMono.variable} ${montserrat.variable}`} suppressHydrationWarning>
                 {children}
             </body>

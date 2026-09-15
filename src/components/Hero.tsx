@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, Variants } from 'framer-motion'
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react'
+import { Github, Linkedin, Mail } from 'lucide-react'
 import CSSBackground from './CSSBackground'
 import { ParallaxText } from './ParallaxSection'
 
@@ -54,7 +54,7 @@ const Hero = () => {
               className="text-center w-full"
             >
               <motion.h1 variants={itemVariants} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 leading-tight text-center w-full px-2 sm:px-4">
-                <span className="text-white inline-block">
+                <span className="text-white inline-block pt-[15px] mt-[2px]">
                   I can develop digital experiences.
                 </span>
               </motion.h1>
@@ -113,20 +113,6 @@ const Hero = () => {
           </ParallaxText>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
-        onClick={(e) => scrollToSection(e, '#projects')}
-      >
-        <div className="flex flex-col items-center justify-center space-y-2 text-gray-500 hover:text-white transition-colors">
-          <span className="text-sm">Scroll Down</span>
-          <ArrowDown size={20} className="animate-bounce" />
-        </div>
-      </motion.div>
     </section>
   )
 }

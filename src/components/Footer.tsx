@@ -1,18 +1,24 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Instagram, Twitter } from 'lucide-react'
-import { AnimatedBackground } from './AnimatedBackground'
+import { Github, Linkedin, Figma } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import CSSBackground from './CSSBackground'
 import { ParallaxSection, ParallaxText } from './ParallaxSection'
 
 const Footer = () => {
-    const currentYear = new Date().getFullYear()
+    const [mounted, setMounted] = useState(false)
+    const [currentYear, setCurrentYear] = useState(2026)
+
+    useEffect(() => {
+        setMounted(true)
+        setCurrentYear(new Date().getFullYear())
+    }, [])
 
     const socialLinks = [
-        { icon: Github, href: 'https://github.com/bemnet884', label: 'GitHub' },
-        { icon: Linkedin, href: 'https://linkedin.com/in/bemnet-yitagesu', label: 'LinkedIn' },
-        { icon: Instagram, href: '#', label: 'Instagram' },
-        { icon: Twitter, href: '#', label: 'Twitter' }
+        { icon: Github, href: 'https://github.com/Bemnet-dev', label: 'GitHub' },
+        { icon: Linkedin, href: 'https://www.linkedin.com/in/bemnet-developer/', label: 'LinkedIn' },
+        { icon: Figma, href: 'https://www.figma.com/@bemnetyitagesum', label: 'Figma' }
     ]
 
     const footerLinks = [
@@ -24,7 +30,7 @@ const Footer = () => {
 
     return (
         <footer className="py-12 sm:py-16 md:py-20 bg-black border-t border-white/10 relative overflow-hidden">
-            <AnimatedBackground />
+            <CSSBackground />
 
             <div className="container-max px-4 sm:px-6 md:px-8 relative z-10">
                 <div className="flex flex-col items-center">

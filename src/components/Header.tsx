@@ -106,9 +106,7 @@ const Header = () => {
             )
           })}
           <a
-            href="/Bemnet_Yitagesu_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/cv"
             className="text-xs lg:text-sm px-4 py-2 border border-white/15 rounded-full hover:bg-white/10 text-gray-300 hover:text-white transition-all duration-300 font-medium ml-1"
           >
             CV
@@ -142,8 +140,8 @@ const Header = () => {
                     key={item.name}
                     onClick={(e) => handleNavClick(e, item.path)}
                     className={`text-left text-base font-semibold px-4 py-2.5 rounded-xl transition-all duration-300 ${isActive
-                        ? 'bg-[#2563eb] text-white'
-                        : 'text-gray-300 hover:text-white hover:bg-white/5'
+                      ? 'bg-[#2563eb] text-white'
+                      : 'text-gray-300 hover:text-white hover:bg-white/5'
                       }`}
                   >
                     {item.name}
@@ -151,9 +149,7 @@ const Header = () => {
                 )
               })}
               <a
-                href="/Bemnet_Yitagesu_Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/cv"
                 className="text-center text-base px-4 py-2.5 border border-white/15 rounded-xl hover:bg-white/10 text-gray-300 hover:text-white transition-all duration-300 font-medium w-full mt-2"
               >
                 Check out my CV

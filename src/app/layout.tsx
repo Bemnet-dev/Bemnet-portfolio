@@ -1,11 +1,16 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono, Montserrat } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 const jetbrainsMono = JetBrains_Mono({
     subsets: ['latin'],
     variable: '--font-mono'
+})
+const montserrat = Montserrat({
+    subsets: ['latin'],
+    weight: ['500', '700'],
+    variable: '--font-montserrat'
 })
 
 export const viewport: Viewport = {
@@ -81,7 +86,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={`${inter.className} ${jetbrainsMono.variable}`}>
+            <body className={`${inter.className} ${jetbrainsMono.variable} ${montserrat.variable}`} suppressHydrationWarning>
                 {children}
             </body>
         </html>

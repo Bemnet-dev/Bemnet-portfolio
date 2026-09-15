@@ -1,14 +1,11 @@
 'use client'
 
-import { useState } from 'react'
 import { motion, Variants } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react'
-import { AnimatedBackground } from './AnimatedBackground'
+import CSSBackground from './CSSBackground'
 import { ParallaxText } from './ParallaxSection'
-import { CVModal } from './CVModal'
 
 const Hero = () => {
-  const [isCVOpen, setIsCVOpen] = useState(false)
 
   const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
     e.preventDefault()
@@ -44,7 +41,7 @@ const Hero = () => {
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden py-20 sm:py-32 md:py-40 lg:py-20">
-      <AnimatedBackground />
+      <CSSBackground />
 
       <div className="container-max relative z-10 w-full flex justify-center px-4 sm:px-6 md:px-8">
         <div className="w-full flex items-center justify-center">
@@ -87,7 +84,7 @@ const Hero = () => {
 
               <motion.div variants={itemVariants} className="flex items-center justify-center space-x-3 sm:space-x-4 md:space-x-6">
                 <a
-                  href="https://github.com/bemnet884"
+                  href="https://github.com/Bemnet-dev"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 sm:p-3 text-gray-400 hover:text-blue-400 transition-colors border border-gray-700 rounded-lg hover:border-blue-500"
@@ -96,7 +93,7 @@ const Hero = () => {
                   <Github size={18} className="sm:w-5 sm:h-5" />
                 </a>
                 <a
-                  href="https://linkedin.com/in/bemnet-yitagesu"
+                  href="https://www.linkedin.com/in/bemnet-developer/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 sm:p-3 text-gray-400 hover:text-blue-400 transition-colors border border-gray-700 rounded-lg hover:border-blue-500"
@@ -105,7 +102,7 @@ const Hero = () => {
                   <Linkedin size={18} className="sm:w-5 sm:h-5" />
                 </a>
                 <a
-                  href="mailto:bemnetyitagesu@gmail.com"
+                  href="mailto:bemnet.important@gmail.com"
                   className="p-2 sm:p-3 text-gray-400 hover:text-blue-400 transition-colors border border-gray-700 rounded-lg hover:border-blue-500"
                   aria-label="Email"
                 >
@@ -122,10 +119,10 @@ const Hero = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5, duration: 0.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
         onClick={(e) => scrollToSection(e, '#projects')}
       >
-        <div className="flex flex-col items-center space-y-2 text-gray-500 hover:text-white transition-colors">
+        <div className="flex flex-col items-center justify-center space-y-2 text-gray-500 hover:text-white transition-colors">
           <span className="text-sm">Scroll Down</span>
           <ArrowDown size={20} className="animate-bounce" />
         </div>

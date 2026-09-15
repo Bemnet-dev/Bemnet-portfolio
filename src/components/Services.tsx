@@ -2,7 +2,7 @@
 
 import { motion, Variants } from 'framer-motion'
 import { Globe, Palette, Code, Figma, Smartphone, Lightbulb, Briefcase, Rocket } from 'lucide-react'
-import { AnimatedBackground } from './AnimatedBackground'
+import CSSBackground from './CSSBackground'
 import { ParallaxSection, ParallaxText } from './ParallaxSection'
 
 const ExpoIcon = () => (
@@ -81,7 +81,7 @@ const Services = () => {
 
     return (
         <section id="services" className="min-h-screen py-16 sm:py-24 md:py-32 bg-black relative overflow-hidden">
-            <AnimatedBackground />
+            <CSSBackground />
 
             <div className="container-max px-4 sm:px-6 md:px-8 relative z-10">
                 <ParallaxText speed={0.3} className="mb-8 sm:mb-12 md:mb-16">

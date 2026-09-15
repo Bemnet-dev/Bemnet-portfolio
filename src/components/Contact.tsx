@@ -2,7 +2,7 @@
 
 import { motion, Variants } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import { Mail, Phone, Send } from 'lucide-react'
+import { Mail, Phone, Send, ChevronDown } from 'lucide-react'
 import { ParallaxSection, ParallaxText } from './ParallaxSection'
 
 const servicesList = ['UI/UX Design', 'Web Development', 'Full Stack', 'Industrial Design']
@@ -14,20 +14,44 @@ const Contact = () => {
     message: '',
     service: ''
   })
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  if (!mounted) {
-    return null
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log(formData)
+    setLoading(true)
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: 'bemnet.important@gmail.com',
+          from: formData.email,
+          name: formData.name,
+          service: formData.service,
+          message: formData.message
+        })
+      })
+
+      if (response.ok) {
+        setSubmitted(true)
+        setFormData({ name: '', email: '', message: '', service: '' })
+        setTimeout(() => setSubmitted(false), 5000)
+      }
+    } catch (error) {
+      console.error('Error sending email:', error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const containerVariants: Variants = {
@@ -79,7 +103,7 @@ const Contact = () => {
                 placeholder="Name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors text-sm sm:text-base"
+                className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all text-sm sm:text-base"
                 required
               />
             </div>
@@ -90,24 +114,56 @@ const Contact = () => {
                 placeholder="Email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors text-sm sm:text-base"
+                className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all text-sm sm:text-base"
                 required
               />
             </div>
 
-            <div>
-              <select
-                value={formData.service}
-                onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl text-gray-400 focus:outline-none focus:border-white/30 transition-colors text-sm sm:text-base"
+            {/* Custom Dropdown */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl text-gray-400 hover:bg-white/10 focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all text-sm sm:text-base flex items-center justify-between"
               >
-                <option value="">I'm interested in...</option>
-                {servicesList.map((service) => (
-                  <option key={service} value={service} className="bg-gray-900">
-                    {service}
-                  </option>
-                ))}
-              </select>
+                <span className={formData.service ? 'text-white' : 'text-gray-400'}>
+                  {formData.service || "I'm interested in..."}
+                </span>
+                <motion.div
+                  animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ChevronDown size={18} className="text-gray-500" />
+                </motion.div>
+              </button>
+
+              {/* Dropdown Menu */}
+              {isDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full left-0 right-0 mt-2 bg-gray-900 border border-white/10 rounded-lg sm:rounded-xl overflow-hidden shadow-lg z-50"
+                >
+                  {servicesList.map((service, index) => (
+                    <button
+                      key={service}
+                      type="button"
+                      onClick={() => {
+                        setFormData({ ...formData, service })
+                        setIsDropdownOpen(false)
+                      }}
+                      className={`w-full text-left px-4 sm:px-6 py-3 sm:py-4 transition-all text-sm sm:text-base ${formData.service === service
+                          ? 'bg-blue-600/20 text-blue-400 border-l-2 border-l-blue-500'
+                          : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                        } ${index !== servicesList.length - 1 ? 'border-b border-white/5' : ''}`}
+                    >
+                      {service}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
             </div>
 
             <div>
@@ -116,18 +172,30 @@ const Contact = () => {
                 rows={5}
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors resize-none text-sm sm:text-base"
+                className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all resize-none text-sm sm:text-base"
                 required
               />
             </div>
 
             <button
               type="submit"
-              className="w-full btn-primary flex items-center justify-center gap-2 text-sm sm:text-base py-3 sm:py-4"
+              disabled={loading}
+              className="w-full btn-primary flex items-center justify-center gap-2 text-sm sm:text-base py-3 sm:py-4 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Send size={18} className="sm:w-5 sm:h-5" />
-              Send Message
+              {loading ? 'Sending...' : 'Send Message'}
             </button>
+
+            {submitted && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="p-4 bg-green-500/10 border border-green-500/50 rounded-lg text-green-400 text-center text-sm sm:text-base"
+              >
+                ✓ Message sent successfully! I'll get back to you soon.
+              </motion.div>
+            )}
           </motion.form>
 
           {/* Direct Contact */}
@@ -135,11 +203,11 @@ const Contact = () => {
             <p className="text-gray-500 mb-3 sm:mb-4 text-sm sm:text-base">Or reach out directly</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
               <a
-                href="mailto:bemnetyitagesu@gmail.com"
-                className="inline-flex items-center gap-2 text-white hover:text-gray-300 transition-colors text-sm sm:text-base"
+                href="mailto:bemnet.important@gmail.com"
+                className="inline-flex items-center gap-2 text-white hover:text-blue-400 transition-colors text-sm sm:text-base"
               >
                 <Mail size={18} className="sm:w-5 sm:h-5" />
-                bemnetyitagesu@gmail.com
+                bemnet.important@gmail.com
               </a>
             </div>
           </motion.div>

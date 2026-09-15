@@ -119,6 +119,16 @@ body {
   display: none;
 }
 
+/* Hide iframe scrollbars */
+iframe {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+iframe::-webkit-scrollbar {
+  display: none;
+}
+
 /* Background abstract shapes */
 .bg-abstract {
   position: relative;

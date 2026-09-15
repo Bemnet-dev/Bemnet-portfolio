@@ -38,6 +38,7 @@ export const ParallaxSection = ({ children, speed = 0.5, className = '' }: Paral
             ref={ref}
             style={{ y: offset }}
             className={className}
+            suppressHydrationWarning
         >
             {children}
         </motion.div>
@@ -81,6 +82,7 @@ export const ParallaxText = ({
             ref={ref}
             style={{ y: offset }}
             className={className}
+            suppressHydrationWarning
         >
             {children}
         </motion.div>

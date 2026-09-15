@@ -7,6 +7,7 @@ import { ParallaxSection } from './ParallaxSection'
 
 const projects = [
     {
+<<<<<<< HEAD
         name: 'HULU PROPERTIES',
         roles: ['Web Design', 'Web Development'],
         description: 'A modern real estate platform showcasing properties with advanced filtering, search functionality, and property management features.',
@@ -45,6 +46,50 @@ const projects = [
         link: 'https://fitmarket.bemnet.vercel.app/',
         image: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749157/Screenshot_2026-08-25_193023_ikfxwx.png',
         color: 'from-blue-700 to-indigo-900'
+=======
+        name: 'Hulu Properties',
+        roles: ['Web Design', 'Front-End Development', 'Product UX'],
+        description: 'A premium real estate marketplace for luxury houses, land, and vehicles with polished listing discovery and secure contact workflows.',
+        timeline: '2 Weeks',
+        myRole: 'Design + Front-End',
+        link: 'https://huluproperties.vercel.app',
+        color: 'from-emerald-600 to-slate-900',
+        technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Vercel'],
+        screenshot: 'https://s.wordpress.com/mshots/v1/https://huluproperties.vercel.app?w=1200'
+    },
+    {
+        name: 'FitMarket',
+        roles: ['Product Design', 'Web Development', 'Marketplace Experience'],
+        description: 'A fitness marketplace connecting clients with elite trainers, gym instructors, and nutritionists through seamless booking flows and profile discovery.',
+        timeline: '2 Weeks',
+        myRole: 'Full-Stack Front-End',
+        link: 'https://fitmarket.bemnet.vercel.app',
+        color: 'from-cyan-500 to-slate-800',
+        technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Vercel'],
+        screenshot: 'https://s.wordpress.com/mshots/v1/https://fitmarket.bemnet.vercel.app?w=1200'
+    },
+    {
+        name: 'Eventrix',
+        roles: ['Web App Development', 'Brand Experience', 'Ticketing UI'],
+        description: 'A premium event ticketing platform with fast booking, event discovery, and secure sign-in flows designed for memorable live experiences.',
+        timeline: '2 Weeks',
+        myRole: 'Front-End Development',
+        link: 'https://eventrix.bemnet.vercel.app',
+        color: 'from-violet-600 to-slate-900',
+        technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Vercel'],
+        screenshot: 'https://s.wordpress.com/mshots/v1/https://eventrix.bemnet.vercel.app?w=1200'
+    },
+    {
+        name: 'BookNow Azure',
+        roles: ['Travel UI', 'Booking Platform', 'Responsive Design'],
+        description: 'A vacation booking platform for hotels and holiday stays, purpose-built to showcase destinations and simplify reservations for travelers.',
+        timeline: '2 Weeks',
+        myRole: 'Web Design + Dev',
+        link: 'https://booknow-azure.vercel.app',
+        color: 'from-sky-500 to-slate-900',
+        technologies: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript', 'Vercel'],
+        screenshot: 'https://s.wordpress.com/mshots/v1/https://booknow-azure.vercel.app?w=1200'
+>>>>>>> bbaf421362787dd45398975425e219d19ba842ab
     }
 ]
 
@@ -133,6 +178,7 @@ const Projects = () => {
                         transition={{ duration: 0.6 }}
                         className="lg:col-span-8 w-full order-2 lg:order-1"
                     >
+<<<<<<< HEAD
                         <div className="bg-gradient-to-br from-blue-600/15 to-indigo-600/5 border border-blue-500/30 rounded-2xl overflow-hidden transition-all duration-300 group">
                             {/* Featured Website Preview Area */}
                             <div className="relative overflow-hidden">
@@ -157,6 +203,20 @@ const Projects = () => {
                                         </motion.div>
                                     </div>
                                 )}
+=======
+                        <div className="bg-gradient-to-br from-blue-600/15 to-indigo-600/5 border border-blue-500/30 rounded-xl sm:rounded-2xl overflow-hidden hover:border-blue-500/60 transition-all duration-300 group h-full flex flex-col">
+                            {/* Featured Image Area */}
+                            <div className="relative overflow-hidden rounded-3xl h-56 sm:h-64 md:h-72 lg:h-80 bg-slate-950">
+                                <img
+                                    src={currentProject.screenshot}
+                                    alt={`Screenshot of ${currentProject.name}`}
+                                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-slate-950/35" />
+                                <div className="absolute left-4 top-4 inline-flex items-center gap-2 bg-slate-950/80 text-white px-3 py-2 rounded-full text-xs uppercase tracking-[0.22em]">
+                                    Screenshot Preview
+                                </div>
+>>>>>>> bbaf421362787dd45398975425e219d19ba842ab
                             </div>
 
                             {/* Content */}
@@ -169,14 +229,33 @@ const Projects = () => {
                                     {currentProject.roles.map((role) => (
                                         <span
                                             key={role}
+<<<<<<< HEAD
                                             className="px-3 py-1.5 text-xs uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/30 rounded-full font-medium"
+=======
+                                            className="px-2 sm:px-3 py-1 text-xs uppercase tracking-wider text-slate-100 bg-slate-700/20 border border-slate-600 rounded-full"
+>>>>>>> bbaf421362787dd45398975425e219d19ba842ab
                                         >
                                             {role}
                                         </span>
                                     ))}
                                 </div>
 
+<<<<<<< HEAD
                                 <p className="text-gray-400 text-base sm:text-lg leading-relaxed mb-8 sm:mb-10">
+=======
+                                <div className="flex flex-wrap gap-2 mb-4">
+                                    {currentProject.technologies.map((tech) => (
+                                        <span
+                                            key={tech}
+                                            className="px-2 sm:px-3 py-1 text-xs uppercase tracking-wider text-slate-100 bg-blue-500/10 border border-blue-500/20 rounded-full"
+                                        >
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
+
+                                <p className="text-gray-400 text-base sm:text-lg md:text-lg mb-6 sm:mb-8 leading-relaxed flex-1">
+>>>>>>> bbaf421362787dd45398975425e219d19ba842ab
                                     {currentProject.description}
                                 </p>
 

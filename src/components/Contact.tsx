@@ -2,7 +2,7 @@
 
 import { motion, Variants } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import { Mail, Phone, Send, ChevronDown } from 'lucide-react'
+import { Mail, Phone, Send, ChevronDown, AlertCircle, ExternalLink, CheckCircle2 } from 'lucide-react'
 import { ParallaxSection, ParallaxText } from './ParallaxSection'
 
 const servicesList = ['UI/UX Design', 'Web Development', 'Full Stack', 'Industrial Design']
@@ -18,6 +18,8 @@ const Contact = () => {
   const [mounted, setMounted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [errorCode, setErrorCode] = useState<string | null>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -26,6 +28,8 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+    setErrorMessage(null)
+    setErrorCode(null)
 
     try {
       const response = await fetch('/api/send-email', {
@@ -42,17 +46,32 @@ const Contact = () => {
         })
       })
 
-      if (response.ok) {
+      const data = await response.json().catch(() => ({}))
+
+      if (response.ok && data.success) {
         setSubmitted(true)
+        setErrorMessage(null)
+        setErrorCode(null)
         setFormData({ name: '', email: '', message: '', service: '' })
-        setTimeout(() => setSubmitted(false), 5000)
+        setTimeout(() => setSubmitted(false), 6000)
+      } else {
+        setErrorMessage(data.error || 'Failed to send message. Please try again.')
+        setErrorCode(data.code || 'UNKNOWN')
       }
     } catch (error) {
       console.error('Error sending email:', error)
+      setErrorMessage('Network error occurred. Please try sending directly via email.')
+      setErrorCode('NETWORK_ERROR')
     } finally {
       setLoading(false)
     }
   }
+
+  const directMailtoUrl = `mailto:bemnet.important@gmail.com?subject=${encodeURIComponent(
+    `Portfolio Inquiry from ${formData.name || 'Visitor'} [${formData.service || 'General'}]`
+  )}&body=${encodeURIComponent(
+    `Hello Bemnet,\n\nName: ${formData.name}\nEmail: ${formData.email}\nService: ${formData.service || 'Not specified'}\n\nMessage:\n${formData.message}\n`
+  )}`
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -183,7 +202,7 @@ const Contact = () => {
               className="w-full btn-primary flex items-center justify-center gap-2 text-sm sm:text-base py-3 sm:py-4 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Send size={18} className="sm:w-5 sm:h-5" />
-              {loading ? 'Sending...' : 'Send Message'}
+              {loading ? 'Sending Message...' : 'Send Message'}
             </button>
 
             {submitted && (
@@ -191,9 +210,43 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
-                className="p-4 bg-green-500/10 border border-green-500/50 rounded-lg text-green-400 text-center text-sm sm:text-base"
+                className="p-4 bg-emerald-950/40 border border-emerald-500/40 rounded-lg sm:rounded-xl text-emerald-300 text-center text-sm sm:text-base flex items-center justify-center gap-2"
               >
-                ✓ Message sent successfully! I'll get back to you soon.
+                <CheckCircle2 size={20} className="text-emerald-400 shrink-0" />
+                <span>Message sent successfully! I'll get back to you soon.</span>
+              </motion.div>
+            )}
+
+            {errorMessage && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 bg-rose-950/40 border border-rose-500/40 rounded-lg sm:rounded-xl text-rose-200 text-left text-sm space-y-3"
+              >
+                <div className="flex items-start gap-2.5">
+                  <AlertCircle size={20} className="text-rose-400 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-rose-200">{errorMessage}</p>
+                    {errorCode === 'BAD_CREDENTIALS' && (
+                      <p className="text-rose-300/80 text-xs mt-1 leading-relaxed">
+                        Tip: Gmail requires a 16-character App Password (not your account password). You can generate one in Google Account &gt; Security &gt; 2-Step Verification &gt; App Passwords.
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-rose-500/20 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
+                  <span className="text-xs text-rose-300/70">
+                    Your message is saved. Send it directly with your email app:
+                  </span>
+                  <a
+                    href={directMailtoUrl}
+                    className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 border border-rose-500/40 rounded-lg text-xs font-medium transition-colors"
+                  >
+                    <span>Open in Email App</span>
+                    <ExternalLink size={13} />
+                  </a>
+                </div>
               </motion.div>
             )}
           </motion.form>

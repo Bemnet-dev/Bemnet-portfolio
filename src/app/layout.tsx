@@ -104,7 +104,7 @@ const jsonLd = {
                 'Web Performance',
                 'Full-Stack Development'
             ],
-            email: 'creedbhope@gmail.com'
+            email: 'bemnet.important@gmail.com'
         },
         {
             '@type': 'WebSite',

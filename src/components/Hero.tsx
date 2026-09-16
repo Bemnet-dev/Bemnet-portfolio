@@ -40,7 +40,11 @@ const Hero = () => {
   }
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center bg-transparent relative overflow-hidden py-20 sm:py-32 md:py-40 lg:py-20">
+    <section
+      id="hero"
+      className="min-h-screen flex items-center justify-center bg-transparent relative overflow-hidden pt-20 sm:pt-32 md:pt-40 lg:pt-20 pb-[35px] pl-[1px]"
+      style={{ paddingBottom: '35px', paddingLeft: '1px' }}
+    >
       <CSSBackground />
 
       <div className="container-max relative z-10 w-full flex justify-center px-4 sm:px-6 md:px-8">

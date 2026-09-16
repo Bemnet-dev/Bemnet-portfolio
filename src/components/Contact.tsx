@@ -3,6 +3,7 @@
 import { motion, Variants } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { Mail, Phone, Send, ChevronDown, AlertCircle, ExternalLink, CheckCircle2 } from 'lucide-react'
+import emailjs from '@emailjs/browser'
 import { ParallaxSection, ParallaxText } from './ParallaxSection'
 
 const servicesList = ['UI/UX Design', 'Web Development', 'Full Stack', 'Industrial Design']
@@ -19,7 +20,6 @@ const Contact = () => {
   const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
-  const [errorCode, setErrorCode] = useState<string | null>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -29,39 +29,46 @@ const Contact = () => {
     e.preventDefault()
     setLoading(true)
     setErrorMessage(null)
-    setErrorCode(null)
+
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+
+    // If EmailJS credentials are not yet set up in the environment, inform the user clearly
+    if (!serviceId || !templateId || !publicKey) {
+      setLoading(false)
+      setErrorMessage(
+        'EmailJS credentials are not configured yet. Please set NEXT_PUBLIC_EMAILJS_SERVICE_ID, NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, and NEXT_PUBLIC_EMAILJS_PUBLIC_KEY in your environment.'
+      )
+      return
+    }
 
     try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          to: 'bemnet.important@gmail.com',
-          from: formData.email,
-          name: formData.name,
-          service: formData.service,
-          message: formData.message
-        })
-      })
+      const templateParams = {
+        name: formData.name,
+        from_name: formData.name,
+        email: formData.email,
+        from_email: formData.email,
+        reply_to: formData.email,
+        service: formData.service || 'General Inquiry',
+        message: formData.message,
+        to_name: 'Bemnet',
+      }
 
-      const data = await response.json().catch(() => ({}))
+      const result = await emailjs.send(serviceId, templateId, templateParams, publicKey)
 
-      if (response.ok && data.success) {
+      if (result.status === 200 || result.text === 'OK') {
         setSubmitted(true)
         setErrorMessage(null)
-        setErrorCode(null)
         setFormData({ name: '', email: '', message: '', service: '' })
         setTimeout(() => setSubmitted(false), 6000)
       } else {
-        setErrorMessage(data.error || 'Failed to send message. Please try again.')
-        setErrorCode(data.code || 'UNKNOWN')
+        setErrorMessage('Failed to send message via EmailJS. Please check your credentials or try again.')
       }
-    } catch (error) {
-      console.error('Error sending email:', error)
-      setErrorMessage('Network error occurred. Please try sending directly via email.')
-      setErrorCode('NETWORK_ERROR')
+    } catch (error: unknown) {
+      console.error('Error sending with EmailJS:', error)
+      const err = error as { text?: string; message?: string }
+      setErrorMessage(err.text || err.message || 'Failed to send message. Please try sending directly via email.')
     } finally {
       setLoading(false)
     }
@@ -227,11 +234,6 @@ const Contact = () => {
                   <AlertCircle size={20} className="text-rose-400 shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold text-rose-200">{errorMessage}</p>
-                    {errorCode === 'BAD_CREDENTIALS' && (
-                      <p className="text-rose-300/80 text-xs mt-1 leading-relaxed">
-                        Tip: Gmail requires a 16-character App Password (not your account password). You can generate one in Google Account &gt; Security &gt; 2-Step Verification &gt; App Passwords.
-                      </p>
-                    )}
                   </div>
                 </div>
 

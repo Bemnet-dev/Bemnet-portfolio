@@ -66,7 +66,7 @@ export default function CVViewer({
   projects,
 }: CVViewerProps) {
   return (
-    <div className="min-h-screen bg-[#07070a] text-white">
+    <div className="min-h-screen bg-black/40 backdrop-blur-[2px] text-white">
       <div className="container mx-auto px-4 py-8 max-w-5xl">
         {/* Header with Navigation */}
         <header className="flex items-center justify-between mb-8 pb-6 border-b border-white/10">

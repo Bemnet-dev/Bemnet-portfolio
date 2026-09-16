@@ -100,11 +100,6 @@ export default function CVPage() {
       link: 'https://eventrix.bemnet.vercel.app/',
     },
     {
-      name: 'BOOKNOW',
-      desc: 'Booking and appointment scheduling platform',
-      link: 'https://booknow-azure.vercel.app/',
-    },
-    {
       name: 'FITMARKET',
       desc: 'Fitness e-commerce platform',
       link: 'https://fitmarket.bemnet.vercel.app/',

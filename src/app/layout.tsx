@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono, Montserrat } from 'next/font/google'
 import './globals.css'
+import AcrylicBackground from '@/components/AcrylicBackground'
 
 const inter = Inter({ subsets: ['latin'] })
 const jetbrainsMono = JetBrains_Mono({
@@ -21,27 +22,35 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-    title: 'Bemnet Yitagesu | Full Stack Developer & Mobile App Developer',
-    description: 'Bemnet Yitagesu is a full-stack developer specializing in web and mobile app development. Building digital experiences with React, Next.js, React Native, and Expo.',
+    metadataBase: new URL('https://bemnet-portfolio.com'),
+    title: {
+        default: 'Bemnet Yitagesu | Full-Stack Developer & UI/UX Designer',
+        template: '%s | Bemnet Yitagesu',
+    },
+    description: 'Bemnet Yitagesu is a full-stack developer and creative designer crafting high-performance web applications, fluid motion experiences, and bespoke digital interfaces.',
     keywords: [
         'Bemnet Yitagesu',
         'Full Stack Developer',
-        'Mobile App Developer',
+        'UI/UX Designer',
+        'Creative Developer',
         'React',
         'Next.js',
-        'React Native',
-        'Expo',
         'TypeScript',
-        'Web Development',
-        'Portfolio',
-        'Webflow Development',
-        'UI/UX Design'
+        'React Native',
+        'Tailwind CSS',
+        'Web Architecture',
+        'Frontend Engineer',
+        'Portfolio'
     ],
     authors: [{ name: 'Bemnet Yitagesu', url: 'https://bemnet-portfolio.com' }],
     creator: 'Bemnet Yitagesu',
     publisher: 'Bemnet Yitagesu',
+    category: 'technology',
+    alternates: {
+        canonical: '/',
+    },
     icons: {
-        icon: '/favicon.ico',
+        icon: '/icon',
     },
     robots: {
         index: true,
@@ -59,24 +68,68 @@ export const metadata: Metadata = {
         locale: 'en_US',
         url: 'https://bemnet-portfolio.com',
         siteName: 'Bemnet Yitagesu Portfolio',
-        title: 'Bemnet Yitagesu | Full Stack Developer & Mobile App Developer',
-        description: 'Portfolio of Bemnet Yitagesu - Full Stack Developer specializing in web and mobile applications',
-        images: [
-            {
-                url: 'https://bemnet-portfolio.com/og-image.png',
-                width: 1200,
-                height: 630,
-                alt: 'Bemnet Yitagesu Portfolio',
-            },
-        ],
+        title: 'Bemnet Yitagesu | Full-Stack Developer & UI/UX Designer',
+        description: 'Portfolio of Bemnet Yitagesu — Full-stack developer & creative designer building resilient web applications and fluid digital experiences.',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Bemnet Yitagesu | Full Stack Developer & Mobile App Developer',
-        description: 'Portfolio of Bemnet Yitagesu - Full Stack Developer specializing in web and mobile applications',
+        title: 'Bemnet Yitagesu | Full-Stack Developer & UI/UX Designer',
+        description: 'Portfolio of Bemnet Yitagesu — Full-stack developer & creative designer building resilient web applications and fluid digital experiences.',
         creator: '@bemnetyitagesu',
-        images: ['https://bemnet-portfolio.com/og-image.png'],
     },
+}
+
+const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+        {
+            '@type': 'Person',
+            '@id': 'https://bemnet-portfolio.com/#person',
+            name: 'Bemnet Yitagesu',
+            jobTitle: 'Full-Stack Developer & UI/UX Designer',
+            url: 'https://bemnet-portfolio.com',
+            sameAs: [
+                'https://github.com/Bemnet-dev',
+                'https://www.linkedin.com/in/bemnet-developer/'
+            ],
+            description: 'Full-stack developer & creative designer building high-performance web applications, fluid motion experiences, and thoughtful digital interfaces.',
+            knowsAbout: [
+                'Next.js',
+                'React',
+                'TypeScript',
+                'Tailwind CSS',
+                'React Native',
+                'Node.js',
+                'UI/UX Design',
+                'Web Performance',
+                'Full-Stack Development'
+            ],
+            email: 'creedbhope@gmail.com'
+        },
+        {
+            '@type': 'WebSite',
+            '@id': 'https://bemnet-portfolio.com/#website',
+            url: 'https://bemnet-portfolio.com',
+            name: 'Bemnet Yitagesu Portfolio',
+            description: 'Official portfolio website of Bemnet Yitagesu, showcasing full-stack projects, design services, and technical expertise.',
+            publisher: {
+                '@id': 'https://bemnet-portfolio.com/#person'
+            },
+            inLanguage: 'en-US'
+        },
+        {
+            '@type': 'ProfilePage',
+            '@id': 'https://bemnet-portfolio.com/#profilepage',
+            url: 'https://bemnet-portfolio.com',
+            name: 'Bemnet Yitagesu Profile',
+            isPartOf: {
+                '@id': 'https://bemnet-portfolio.com/#website'
+            },
+            mainEntity: {
+                '@id': 'https://bemnet-portfolio.com/#person'
+            }
+        }
+    ]
 }
 
 export default function RootLayout({
@@ -87,6 +140,10 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <head>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                />
                 <script
                     dangerouslySetInnerHTML={{
                         __html: `
@@ -107,7 +164,8 @@ export default function RootLayout({
                     }}
                 />
             </head>
-            <body className={`${inter.className} ${jetbrainsMono.variable} ${montserrat.variable}`} suppressHydrationWarning>
+            <body className={`${inter.className} ${jetbrainsMono.variable} ${montserrat.variable} bg-black text-white relative min-h-screen`} suppressHydrationWarning>
+                <AcrylicBackground />
                 {children}
             </body>
         </html>

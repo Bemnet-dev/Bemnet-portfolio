@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Github, Linkedin, Figma } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import CSSBackground from './CSSBackground'
 import { ParallaxSection, ParallaxText } from './ParallaxSection'
 
@@ -18,98 +19,127 @@ const Footer = () => {
     const socialLinks = [
         { icon: Github, href: 'https://github.com/Bemnet-dev', label: 'GitHub' },
         { icon: Linkedin, href: 'https://www.linkedin.com/in/bemnet-developer/', label: 'LinkedIn' },
-        { icon: Figma, href: 'https://www.figma.com/@bemnetyitagesum', label: 'Figma' }
+        { icon: Figma, href: 'https://www.figma.com/@bemnetyitagesum', label: 'Figma' },
     ]
 
     const footerLinks = [
         { name: 'Work', path: '#projects' },
         { name: 'Services', path: '#services' },
         { name: 'About', path: '#about' },
-        { name: 'Contact', path: '#contact' }
+        { name: 'Contact', path: '#contact' },
     ]
 
     return (
-        <footer className="py-12 sm:py-16 md:py-20 bg-black border-t border-white/10 relative overflow-hidden">
+        <footer className="relative overflow-hidden border-t border-white/10 bg-gradient-to-b from-black/40 via-[#030712]/75 to-[#020409]/95 backdrop-blur-xl pt-16 sm:pt-20 pb-10 sm:pb-12 text-white">
             <CSSBackground />
 
+            {/* Glowing Accent Top Bar */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-px bg-gradient-to-r from-transparent via-blue-500/70 to-transparent pointer-events-none" />
+
+            {/* Soft Ambient Radial Glow */}
+            <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+
             <div className="container-max px-4 sm:px-6 md:px-8 relative z-10">
-                <div className="flex flex-col items-center">
-                    {/* Name */}
-                    <ParallaxText speed={0.3}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                            className="mb-6 sm:mb-8"
-                        >
-                            <h3 className="text-lg sm:text-2xl font-bold text-white">BEMNET YITAGESU</h3>
-                        </motion.div>
-                    </ParallaxText>
+                {/* Main Content Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-12">
+                    {/* Brand & Identity Column */}
+                    <div className="md:col-span-6 lg:col-span-5 flex flex-col items-start">
+                        <ParallaxText speed={0.2}>
+                            <motion.div
+                                initial={{ opacity: 0, y: 16 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5 }}
+                            >
+                                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-2 font-mono">
+                                    BEMNET YITAGESU
+                                </h3>
+                                <p className="text-sm text-gray-400 max-w-md leading-relaxed">
+                                    Full-stack developer & creative designer building high-performance web applications, fluid motion experiences, and thoughtful digital interfaces.
+                                </p>
+                            </motion.div>
+                        </ParallaxText>
+                    </div>
 
-                    {/* Navigation Links */}
-                    <ParallaxSection speed={0.2} className="w-full">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.1 }}
-                            className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8"
-                        >
-                            {footerLinks.map((link) => (
-                                <a
-                                    key={link.name}
-                                    href={link.path}
-                                    className="text-gray-400 hover:text-white transition-colors text-xs sm:text-sm md:text-base"
-                                >
-                                    {link.name}
-                                </a>
-                            ))}
-                        </motion.div>
-                    </ParallaxSection>
+                    {/* Navigation Links Column */}
+                    <div className="md:col-span-3 lg:col-span-3">
+                        <ParallaxSection speed={0.15}>
+                            <motion.div
+                                initial={{ opacity: 0, y: 16 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: 0.15 }}
+                            >
+                                <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">
+                                    Navigation
+                                </p>
+                                <ul className="space-y-3">
+                                    {footerLinks.map((link) => (
+                                        <li key={link.name}>
+                                            <a
+                                                href={link.path}
+                                                className="text-sm text-gray-400 hover:text-white transition-colors"
+                                            >
+                                                {link.name}
+                                            </a>
+                                        </li>
+                                    ))}
+                                    <li>
+                                        <Link
+                                            href="/cv"
+                                            className="text-sm text-blue-400/90 hover:text-blue-300 transition-colors"
+                                        >
+                                            Curriculum Vitae
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </motion.div>
+                        </ParallaxSection>
+                    </div>
 
-                    {/* Social Links */}
-                    <ParallaxText speed={-0.1} className="w-full">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="flex items-center justify-center gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8"
-                        >
-                            {socialLinks.map((social) => (
-                                <a
-                                    key={social.label}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="p-2 sm:p-3 text-gray-400 hover:text-blue-400 transition-colors border border-gray-700 rounded-lg hover:border-blue-500"
-                                    aria-label={social.label}
-                                >
-                                    <social.icon size={16} className="sm:w-5 sm:h-5" />
-                                </a>
-                            ))}
-                        </motion.div>
-                    </ParallaxText>
+                    {/* Social Connect Column */}
+                    <div className="md:col-span-3 lg:col-span-4">
+                        <ParallaxSection speed={0.15}>
+                            <motion.div
+                                initial={{ opacity: 0, y: 16 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: 0.2 }}
+                            >
+                                <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">
+                                    Connect & Follow
+                                </p>
+                                <div className="flex flex-wrap gap-2.5">
+                                    {socialLinks.map((social) => (
+                                        <a
+                                            key={social.label}
+                                            href={social.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 px-3.5 py-2 text-xs sm:text-sm text-gray-300 hover:text-white bg-white/[0.03] hover:bg-blue-500/10 border border-white/10 hover:border-blue-500/40 rounded-lg transition-all duration-300"
+                                            aria-label={social.label}
+                                        >
+                                            <social.icon size={15} className="text-blue-400" />
+                                            <span>{social.label}</span>
+                                        </a>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        </ParallaxSection>
+                    </div>
+                </div>
 
-                    {/* Copyright */}
-                    <ParallaxSection speed={0.25}>
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.3 }}
-                            className="text-center"
-                            suppressHydrationWarning
-                        >
-                            <p className="text-gray-500 text-xs sm:text-sm">
-                                &copy; {currentYear} Bemnet Yitagesu. All rights reserved.
-                            </p>
-                            <p className="text-gray-600 text-xs mt-2">
-                                Crafted by Bemnet Yitagesu
-                            </p>
-                        </motion.div>
-                    </ParallaxSection>
+                {/* Bottom Bar Divider & Meta */}
+                <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+                    <p suppressHydrationWarning>
+                        &copy; {currentYear} Bemnet Yitagesu. All rights reserved.
+                    </p>
+
+                    <div className="flex items-center gap-4">
+                        <span className="text-gray-500">
+                            Designed & Built with Next.js & WebGL
+                        </span>
+                    </div>
                 </div>
             </div>
         </footer>

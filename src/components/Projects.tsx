@@ -73,22 +73,12 @@ const projects: Project[] = [
         timeline: '2026',
         link: 'https://eventrix.bemnet.vercel.app',
         image: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749158/Screenshot_2026-08-25_193047_eeqqup.png'
-    },
-    {
-        name: 'BookNow Azure',
-        category: 'Hospitality Booking',
-        subCategory: 'Travel & Accommodation',
-        roles: ['Web Development', 'Booking System'],
-        description: 'A comprehensive vacation booking platform for hotels and holiday stays.',
-        timeline: '2026',
-        link: 'https://booknow-azure.vercel.app',
-        image: 'https://res.cloudinary.com/dqkhfls1w/image/upload/v1787749158/Screenshot_2026-08-25_193115_whq0kb.png'
     }
 ]
 
 const Projects = () => {
     return (
-        <section id="projects" className="mt-0 pt-0 pb-16 sm:pb-20 md:pb-24 bg-black text-white relative">
+        <section id="projects" className="mt-0 pt-0 pb-16 sm:pb-20 md:pb-24 bg-transparent text-white relative">
             <div className="container-max px-4 sm:px-6 md:px-8">
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-8 sm:mb-12 pb-4 border-b border-white/20">

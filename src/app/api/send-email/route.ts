@@ -1,13 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASSWORD,
+function getTransporter() {
+  const user = process.env.GMAIL_USER
+  const pass = process.env.GMAIL_PASSWORD
+
+  if (!user || !pass) {
+    return null
   }
-})
+
+  return nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user,
+      pass,
+    },
+  })
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,6 +27,26 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
+      )
+    }
+
+    const transporter = getTransporter()
+
+    if (!transporter) {
+      // In production or demo environments without SMTP credentials,
+      // log and respond cleanly so the app doesn't crash
+      console.warn('GMAIL_USER or GMAIL_PASSWORD not set. Message logged:', {
+        from,
+        name,
+        service,
+        message,
+      })
+      return NextResponse.json(
+        {
+          success: true,
+          message: 'Message received! (Email credentials not configured in environment, logged successfully)',
+        },
+        { status: 200 }
       )
     }
 

@@ -74,7 +74,7 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="min-h-screen pt-[50px] pb-0 bg-black">
+    <section id="contact" className="min-h-screen pt-[50px] pb-0 bg-transparent">
       <div className="container-max px-4 sm:px-6 md:px-8">
         <ParallaxText speed={0.3} className="mb-8 sm:mb-12 md:mb-16">
           <motion.div

@@ -30,15 +30,15 @@ const Contact = () => {
     setLoading(true)
     setErrorMessage(null)
 
-    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
-    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || process.env.EMAILJS_SERVICE_ID || 'service_34iz2mv'
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || process.env.EMAILJS_TEMPLATE_ID || 'template_tu8785s'
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || process.env.EMAILJS_PUBLIC_KEY || '-BajkdSnDhFBBBGDP'
 
-    // If EmailJS credentials are not yet set up in the environment, inform the user clearly
+    // If EmailJS credentials are not available, inform the user
     if (!serviceId || !templateId || !publicKey) {
       setLoading(false)
       setErrorMessage(
-        'EmailJS credentials are not configured yet. Please set NEXT_PUBLIC_EMAILJS_SERVICE_ID, NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, and NEXT_PUBLIC_EMAILJS_PUBLIC_KEY in your environment.'
+        'EmailJS credentials are not configured yet. Please check your EmailJS configuration.'
       )
       return
     }

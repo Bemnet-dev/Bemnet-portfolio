@@ -119,7 +119,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Bemnet Yitagesu**
 - Email: bemnet.importnat@gmail.com
 - LinkedIn: [bemnet-yitagesu](https://www.linkedin.com/in/bemnet-developer/)
-- GitHub: [@bemnet884](https://github.com/Bemnet-dev)
+- GitHub: [@bemnet-dev](https://github.com/Bemnet-dev)
 
 ---
 

@@ -18,7 +18,7 @@ A modern, responsive portfolio website built with Next.js 14, TypeScript, and Ta
 - **Framework:** Next.js 14
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS
-- **Animation:** Framer Motion
+- **Animation:** WebGl
 - **Icons:** Lucide React
 - **Theme:** next-themes
 - **Deployment:** Vercel (recommended)
@@ -82,26 +82,6 @@ export const metadata: Metadata = {
 }
 ```
 
-## 🚀 Deployment
-
-### Deploy on Vercel (Recommended)
-
-1. **Connect your repository to Vercel**
-2. **Configure build settings:**
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-3. **Deploy**
-
-### Deploy on Netlify
-
-1. **Build the project:**
-   ```bash
-   npm run build
-   npm run export
-   ```
-
-2. **Upload the `dist` folder to Netlify**
-
 ### Other Platforms
 
 The project uses static export, making it compatible with any static hosting service:
@@ -137,10 +117,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 **Bemnet Yitagesu**
-- Email: bemnetyitagesu@gmail.com
-- LinkedIn: [bemnet-yitagesu](https://linkedin.com/in/bemnet-yitagesu)
-- GitHub: [@bemnet884](https://github.com/bemnet884)
+- Email: bemnet.importnat@gmail.com
+- LinkedIn: [bemnet-yitagesu](https://www.linkedin.com/in/bemnet-developer/)
+- GitHub: [@bemnet884](https://github.com/Bemnet-dev)
 
 ---
 
-Made with ❤️ and Next.js
+Made with ❤️ and Next.js and WebGL

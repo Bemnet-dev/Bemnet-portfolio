@@ -3,7 +3,6 @@
 import { motion, Variants } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { Mail, Phone, Send, ChevronDown, AlertCircle, ExternalLink, CheckCircle2 } from 'lucide-react'
-import emailjs from '@emailjs/browser'
 import { ParallaxSection, ParallaxText } from './ParallaxSection'
 
 const servicesList = ['UI/UX Design', 'Web Development', 'Full Stack', 'Industrial Design']
@@ -30,45 +29,33 @@ const Contact = () => {
     setLoading(true)
     setErrorMessage(null)
 
-    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || process.env.EMAILJS_SERVICE_ID || 'service_34iz2mv'
-    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || process.env.EMAILJS_TEMPLATE_ID || 'template_tu8785s'
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || process.env.EMAILJS_PUBLIC_KEY || '-BajkdSnDhFBBBGDP'
-
-    // If EmailJS credentials are not available, inform the user
-    if (!serviceId || !templateId || !publicKey) {
-      setLoading(false)
-      setErrorMessage(
-        'EmailJS credentials are not configured yet. Please check your EmailJS configuration.'
-      )
-      return
-    }
-
     try {
-      const templateParams = {
-        name: formData.name,
-        from_name: formData.name,
-        email: formData.email,
-        from_email: formData.email,
-        reply_to: formData.email,
-        service: formData.service || 'General Inquiry',
-        message: formData.message,
-        to_name: 'Bemnet',
-      }
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          service: formData.service || 'General Inquiry',
+          message: formData.message,
+        }),
+      })
 
-      const result = await emailjs.send(serviceId, templateId, templateParams, publicKey)
+      const data = await response.json().catch(() => ({}))
 
-      if (result.status === 200 || result.text === 'OK') {
+      if (response.ok && data.success) {
         setSubmitted(true)
         setErrorMessage(null)
         setFormData({ name: '', email: '', message: '', service: '' })
         setTimeout(() => setSubmitted(false), 6000)
       } else {
-        setErrorMessage('Failed to send message via EmailJS. Please check your credentials or try again.')
+        setErrorMessage(data.error || 'Failed to send message. Please try sending directly via email.')
       }
     } catch (error: unknown) {
-      console.error('Error sending with EmailJS:', error)
-      const err = error as { text?: string; message?: string }
-      setErrorMessage(err.text || err.message || 'Failed to send message. Please try sending directly via email.')
+      console.error('Error sending message:', error)
+      setErrorMessage('Network error occurred. Please try sending directly via email.')
     } finally {
       setLoading(false)
     }

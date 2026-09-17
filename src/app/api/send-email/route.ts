@@ -27,8 +27,9 @@ export async function POST(req: NextRequest) {
 
     const resend = new Resend(apiKey)
 
-    // Recipient email - prioritize configured CONTACT_EMAIL, fallback to portfolio emails
-    const recipient = process.env.CONTACT_EMAIL?.trim() || 'bemnet.important@gmail.com'
+    // Recipient email - defaults to your verified Resend account email (creedbhope@gmail.com)
+    // You can override this via CONTACT_EMAIL once you verify a custom domain at resend.com/domains
+    const recipient = process.env.CONTACT_EMAIL?.trim() || 'creedbhope@gmail.com'
 
     // Sender - Resend free sandbox requires onboarding@resend.dev unless a custom domain is verified
     const sender = process.env.RESEND_FROM_EMAIL?.trim() || 'Portfolio Contact <onboarding@resend.dev>'
